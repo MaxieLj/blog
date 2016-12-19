@@ -12,10 +12,10 @@ function test() {
 	$.getJSON("/photo/output.json", function (data) {
 		var li="";
     	 for(i=0;i<=data.length-1;i++){
-    	 	li += '<div class="img-box" style="float:left;margin-left:1px">' +
-                   '<img src="https://raw.githubusercontent.com/MaxieLj/blog/master/photos/' + data[i] + '" style="width:25%;height:25%;float:left"/></div>' 
+    	 	li += '<div style="width:250px;height:250px;float:left;margin-left:10px"><img src="https://raw.githubusercontent.com/MaxieLj/blog/master/photos/' + data[i] + '"  style="width:100%; height:100%;float:left"/></div>'
                    ;
     	 }
+       li+='<div style="clear:both"></div>'
     	 $('.instagram').append(li);   	
     });
     
