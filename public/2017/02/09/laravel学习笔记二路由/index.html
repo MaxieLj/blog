@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>&#39;laravel学习笔记二路由&#39; | 和女票抢可乐</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="laravel框架安装好之后我们就要开始熟悉laravel框架的内部结构。我们主要是从这个几个方便来学习laravel：  route 路由 controller 控制器 blade 模板 model 模型  今天我们主要讲路由。 laravel-route可能我们在学习laravel之前已经接触过一些框架例如：yii">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&#39;laravel学习笔记二路由&#39;">
+<meta property="og:url" content="http://yoursite.com/2017/02/09/laravel学习笔记二路由/index.html">
+<meta property="og:site_name" content="和女票抢可乐">
+<meta property="og:description" content="laravel框架安装好之后我们就要开始熟悉laravel框架的内部结构。我们主要是从这个几个方便来学习laravel：  route 路由 controller 控制器 blade 模板 model 模型  今天我们主要讲路由。 laravel-route可能我们在学习laravel之前已经接触过一些框架例如：yii，tp,ci。但是他们都没有laravel所带的路由系统强大，我们现在开始介绍l">
+<meta property="og:updated_time" content="2017-02-09T14:12:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="&#39;laravel学习笔记二路由&#39;">
+<meta name="twitter:description" content="laravel框架安装好之后我们就要开始熟悉laravel框架的内部结构。我们主要是从这个几个方便来学习laravel：  route 路由 controller 控制器 blade 模板 model 模型  今天我们主要讲路由。 laravel-route可能我们在学习laravel之前已经接触过一些框架例如：yii，tp,ci。但是他们都没有laravel所带的路由系统强大，我们现在开始介绍l">
+  
+    <link rel="alternative" href="/atom.xml" title="和女票抢可乐" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://raw.githubusercontent.com/MaxieLj/blog/master/source/b325609689e6e350fab73951048aba5b_xl.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">MaxieLj</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">首页</a></li>
+	        
+				<li><a href="/archives">归档</a></li>
+	        
+				<li><a href="/photo">相册</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/MaxieLj" title="github"><i class="icon-github"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">MaxieLj</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://raw.githubusercontent.com/MaxieLj/blog/master/source/b325609689e6e350fab73951048aba5b_xl.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">MaxieLj</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">首页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+					<li><a href="/photo">相册</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/MaxieLj" title="github"><i class="icon-github"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-laravel学习笔记二路由" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      &#39;laravel学习笔记二路由&#39;
+    </h1>
+  
+
+        <a href="/2017/02/09/laravel学习笔记二路由/" class="archive-article-date">
+  	<time datetime="2017-02-09T14:09:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-09</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>laravel框架安装好之后我们就要开始熟悉laravel框架的内部结构。<br>我们主要是从这个几个方便来学习laravel：</p>
+<ul>
+<li>route 路由</li>
+<li>controller 控制器</li>
+<li>blade 模板</li>
+<li>model 模型</li>
+</ul>
+<p>今天我们主要讲路由。</p>
+<h3 id="laravel-route"><a href="#laravel-route" class="headerlink" title="laravel-route"></a>laravel-route</h3><p>可能我们在学习laravel之前已经接触过一些框架例如：yii，tp,ci。<br>但是他们都没有laravel所带的路由系统强大，我们现在开始介绍laravel框架的路由。</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>最基本的路由接受的是一个闭包函数，直接返回值，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Roure::get(&apos;/&apos;,funcition()&#123;</div><div class="line">return &apos;this is Route&apos;&#125;)</div></pre></td></tr></table></figure></p>
+<p>我们在 <strong>/routes/web.php</strong> 里注册该路由即可返回 <code>this us Route</code>。当然laravel路由所能接受的请求方式不仅仅是get还要post put 等等法法，示例如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Route::get($uri, $callback);</div><div class="line">Route::post($uri, $callback);</div><div class="line">Route::put($uri, $callback);</div><div class="line">Route::patch($uri, $callback);</div><div class="line">Route::delete($uri, $callback);</div><div class="line">Route::options($uri, $callback);</div></pre></td></tr></table></figure></p>
+<h3 id="带参数访问"><a href="#带参数访问" class="headerlink" title="带参数访问"></a>带参数访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Roure::get(&apos;/&#123;id&#125;&apos;,function($id)&#123;</div><div class="line">return &apos;user id is &apos;.$id</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p> 当然也可以带多参数访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;/id/&#123;id&#125;/name/&#123;name&#125;&apos;,function($id,$name)&#123;</div><div class="line">//</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p> 让然也可以传递一个可选参数 ,但是我们需要用<code>？</code>来标记该参数，还给予他默认值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;/name/&#123;name&#125;?&apos;,function($name=&apos;Maxie&apos;)&#123;</div><div class="line">//</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h3 id="路由命名"><a href="#路由命名" class="headerlink" title="路由命名"></a>路由命名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Roure::get(&apos;/&apos;,funcition()&#123;</div><div class="line">return &apos;this is Route&apos;&#125;)-&gt;name(&apos;index&apos;)</div></pre></td></tr></table></figure>
+<p>我们可以给路由命名一个名字，让我们在模板中使用rul函数可以解析到我们所命名的路由<code>url(&#39;index&#39;)</code>。这些我们在模板中在细讲</p>
+<h3 id="路由群组"><a href="#路由群组" class="headerlink" title="路由群组"></a>路由群组</h3><p>路由群组是一个很好东西，我们在开发中很定会给我们的项目分不同模块。例如用户模块，商户模块。这时候我么会给他们加上不同的命名空间，我们可以通过路由群组把我们注册的路由也分类，很方便我们的访问。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::groun([&apos;namespace&apos;=&gt;&apos;user&apos;],function()&#123;</div><div class="line">//我们可以在此注册我们的路由，路由控制器路由会在App/Http/Controller/user 下</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p> 当让我们可以在群组里继续注册群组，在这里我们不多做演示。</p>
+<h2 id="路由绑定到控制器"><a href="#路由绑定到控制器" class="headerlink" title="路由绑定到控制器"></a>路由绑定到控制器</h2><p>这是我们最关键的地方，一般我们通过访问URI都会想传递参数给我们的控制器，当然laravel还给我们提供了中间件让我们在路路由控制器之间或者路由玉模板之前做一个参数处理或者过滤，我们在此不做演示。后边我们会详细解释，现在我们详细解释路由有绑定到控制器，想必这是你我最关系的。<br>路由绑定到控制器只需要：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Roure::get(&apos;/&apos;,&apos;UserController@showProfile&apos;)</div></pre></td></tr></table></figure></p>
+<p>这样既可绑定我么你的路由到控制器。</p>
+<h2 id="路由绑定绑定到视图"><a href="#路由绑定绑定到视图" class="headerlink" title="路由绑定绑定到视图"></a>路由绑定绑定到视图</h2><p>有很多的访问不需要我们做处理，只需展示一些东西既可，我么你可以直接把路由绑定到视图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;/&apos;,function()&#123;</div><div class="line">return view(&apos;welcom&apos;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">这也是我们刚刚配置完laravel时候路由web.php唯一注册一个路由</div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/02/09/laravel学习笔记二路由/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/02/16/Laravel学习笔记三控制器/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Laravel学习笔记三控制器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/08/larave学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">laravel学习笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 MaxieLj
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.zybuluo.com/mdeditor" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>在线编辑器</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
