@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Laravel学习笔记三控制器 | 和女票抢可乐</title>
+  <title>微服务数据一致性和服务可靠性 | 和女票抢可乐</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="标签（空格分隔）： Laravel  关于laravel我们学习了如何配置laravel、以及路由。接下来让然是至关重要的控制器了。在MVC框架中，C是一个很重要的环节。用来处理我们的数据逻辑。 我们之前在学习路由是后，是给Route::get()第二个参数一个闭包函数。当然能处理一些数据逻辑，但是如果我们所有的数据逻">
+  <meta name="description" content="存在问题  我们的保证金服务现有结构是这个样子。在 1、2、3、4、5、6 各个阶段都会存在超时和异常问题，当负载少时，我们还可以手动人工处理，但是当数据量大的时候，问题或多的令人发指，沉浸于洗数据，无法自拔。。超时存在问题：1.当1、2、3 步骤超时时，下游服务可以忽略，当做执行失败，重试。2.当在环节4、5、6超时">
+<meta name="keywords" content="分布式,事务">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Laravel学习笔记三控制器">
-<meta property="og:url" content="http://yoursite.com/2017/02/16/Laravel学习笔记三控制器/index.html">
+<meta property="og:title" content="微服务数据一致性和服务可靠性">
+<meta property="og:url" content="http://yoursite.com/2018/05/17/微服务数据一致性和服务可靠性/index.html">
 <meta property="og:site_name" content="和女票抢可乐">
-<meta property="og:description" content="标签（空格分隔）： Laravel  关于laravel我们学习了如何配置laravel、以及路由。接下来让然是至关重要的控制器了。在MVC框架中，C是一个很重要的环节。用来处理我们的数据逻辑。 我们之前在学习路由是后，是给Route::get()第二个参数一个闭包函数。当然能处理一些数据逻辑，但是如果我们所有的数据逻辑都放在路由文件，那么我们路由文件将会特别臃肿，而且我们的代码耦合度会特别高。这">
-<meta property="og:updated_time" content="2017-02-16T13:30:26.000Z">
+<meta property="og:description" content="存在问题  我们的保证金服务现有结构是这个样子。在 1、2、3、4、5、6 各个阶段都会存在超时和异常问题，当负载少时，我们还可以手动人工处理，但是当数据量大的时候，问题或多的令人发指，沉浸于洗数据，无法自拔。。超时存在问题：1.当1、2、3 步骤超时时，下游服务可以忽略，当做执行失败，重试。2.当在环节4、5、6超时时，对于下游服务是也是执行失败，但是还可以重试么？ 如何提高服务可靠性对于上游">
+<meta property="og:image" content="http://yoursite.com/2018/05/17/微服务数据一致性和服务可靠性/images/%E4%BF%9D%E8%AF%81%E9%87%91%E6%9C%8D%E5%8A%A1-2-2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/17/微服务数据一致性和服务可靠性/images/%E8%A1%A5%E5%81%BF%E6%9C%BA%E5%88%B6.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/17/微服务数据一致性和服务可靠性/images/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6_2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/17/微服务数据一致性和服务可靠性/images/%E8%BD%A6%E5%95%86%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%92%8C%E8%B4%A2%E5%8A%A1%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7.png">
+<meta property="og:updated_time" content="2018-05-17T03:28:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Laravel学习笔记三控制器">
-<meta name="twitter:description" content="标签（空格分隔）： Laravel  关于laravel我们学习了如何配置laravel、以及路由。接下来让然是至关重要的控制器了。在MVC框架中，C是一个很重要的环节。用来处理我们的数据逻辑。 我们之前在学习路由是后，是给Route::get()第二个参数一个闭包函数。当然能处理一些数据逻辑，但是如果我们所有的数据逻辑都放在路由文件，那么我们路由文件将会特别臃肿，而且我们的代码耦合度会特别高。这">
+<meta name="twitter:title" content="微服务数据一致性和服务可靠性">
+<meta name="twitter:description" content="存在问题  我们的保证金服务现有结构是这个样子。在 1、2、3、4、5、6 各个阶段都会存在超时和异常问题，当负载少时，我们还可以手动人工处理，但是当数据量大的时候，问题或多的令人发指，沉浸于洗数据，无法自拔。。超时存在问题：1.当1、2、3 步骤超时时，下游服务可以忽略，当做执行失败，重试。2.当在环节4、5、6超时时，对于下游服务是也是执行失败，但是还可以重试么？ 如何提高服务可靠性对于上游">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/17/微服务数据一致性和服务可靠性/images/%E4%BF%9D%E8%AF%81%E9%87%91%E6%9C%8D%E5%8A%A1-2-2.png">
   
     <link rel="alternative" href="/atom.xml" title="和女票抢可乐" type="application/atom+xml">
   
@@ -135,35 +141,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Laravel学习笔记三控制器" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-微服务数据一致性和服务可靠性" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Laravel学习笔记三控制器
+      微服务数据一致性和服务可靠性
     </h1>
   
 
-        <a href="/2017/02/16/Laravel学习笔记三控制器/" class="archive-article-date">
-  	<time datetime="2017-02-16T13:26:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-16</time>
+        <a href="/2018/05/17/微服务数据一致性和服务可靠性/" class="archive-article-date">
+  	<time datetime="2018-05-17T03:28:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>标签（空格分隔）： Laravel</p>
-<hr>
-<p>关于laravel我们学习了如何配置laravel、以及路由。接下来让然是至关重要的控制器了。<br>在MVC框架中，C是一个很重要的环节。用来处理我们的数据逻辑。</p>
-<p>我们之前在学习路由是后，是给Route::get()第二个参数一个闭包函数。当然能处理一些数据逻辑，但是如果我们所有的数据逻辑都放在路由文件，那么我们路由文件将会特别臃肿，而且我们的代码耦合度会特别高。这也就回到php面向过程的时代，这不是我们所想要的。</p>
-<p>在我们的面向对象的思维中，是把不同功能的代码封装成一个一个类，各自处理自己流水线上的数据。所以我们要通过路由把必要的参数传给我们的控制器去处理。</p>
-<p>在这里看到一个小插曲，Laravel官方文档说在上线前使用<code>php artisan route:cache</code>会让路由速度快上一百倍，我不知道这是不是吹牛逼。废话不多说我们开始我们的控制器学习吧。</p>
-<p>###控制器到路由###</p>
-<p> 在第一步我们需要把访问到路由的请求转到控制器。在Laravel中使用下边代码即可：<br> <figure class="highlight plain"><figcaption><span>'UserController@show');```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  我们可以把客户的请求跳转到 App/Http/Controller下的UserController的show方法。</div><div class="line">  </div><div class="line">  在这里laravel给我们提供很好的工具让我们来创建控制器。使用`php artisan make:controller NameController` 。默认会出现App/Http/Controller 路径下。并且还有一些级基础代码。</div><div class="line">```&lt;?php</div><div class="line"></div><div class="line">namespace App\Http\Controllers;</div><div class="line"></div><div class="line">use Illuminate\Http\Request;</div><div class="line">use App\Http\Controllers\Controller;</div><div class="line"></div><div class="line">class NameController extends Controller</div><div class="line">&#123;</div><div class="line">    //</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>###传递参数到控制器###</p>
-<p>我们看到在自动生成代码中我们看到引入了<code>Request</code> 类。这个类要讲起来其实可以单独讲，但是我们学到控制器就稍微讲一下，不然没法传递参数。如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public function index(Request $request)&#123;</div><div class="line">   	$name = $request-&gt;input(&apos;name&apos;);</div><div class="line"></div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
-<p>用该方法可以获取到我们想要的参数。</p>
+        <p><img src="./images/%E4%BF%9D%E8%AF%81%E9%87%91%E6%9C%8D%E5%8A%A1-2-2.png" alt="enter description here" title="保证金服务-2-2.png"></p>
+<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><p>  我们的保证金服务现有结构是这个样子。<br>在 1、2、3、4、5、6 各个阶段都会存在超时和异常问题，当负载少时，我们还可以手动人工处理，但是当数据量大的时候，问题或多的令人发指，沉浸于洗数据，无法自拔。。<br>超时存在问题：<br>1.当1、2、3 步骤超时时，下游服务可以忽略，当做执行失败，重试。<br>2.当在环节4、5、6超时时，对于下游服务是也是执行失败，但是还可以重试么？</p>
+<h2 id="如何提高服务可靠性"><a href="#如何提高服务可靠性" class="headerlink" title="如何提高服务可靠性"></a>如何提高服务可靠性</h2><p>对于上游服务，如何保证对下游提供可靠的服务。</p>
+<h3 id="补偿机制"><a href="#补偿机制" class="headerlink" title="补偿机制"></a>补偿机制</h3><p> <img src="./images/%E8%A1%A5%E5%81%BF%E6%9C%BA%E5%88%B6.png" alt="enter description here" title="补偿机制.png"><br> 在服务间的调用失败时，可以记录失败调用，如队列，消费重试。但是前提一定是接口幂等。<br> 但是这样并不能解决根本性问题，如果我们在调用保证金冻结服务时，失败此时我们冻结时报操作入队列，让队列异步消费，如果此时要解冻保证金，就会出现业务异常。</p>
+<p> <strong>所以</strong>补偿机制建议使用在 <code>不可避免的业务异常情况下使用</code>，我们应该尽可能的优化技术方案，来保证数据一致性，最后再采用补偿机制。</p>
+<h3 id="两段提交协议（2pc）"><a href="#两段提交协议（2pc）" class="headerlink" title="两段提交协议（2pc）"></a>两段提交协议（2pc）</h3><p><img src="./images/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6_2.png" alt="enter description here" title="未命名文件.png"></p>
+<p>preOperation 执行请求，在调用微服务前，执行预操作成功则表示此次操作可行。<br>如果commit失败该如何处理？重新preOperetion嘛？如果接口幂等是否可以重复，commit？如何保证避免重复提交？<br>在preOperation时，返回唯一操作ID，业务逻辑每个操作对应一个操作ID，commit失败就重试，当然前提是我们的上有服务接口幂等。</p>
+<p><img src="./images/%E8%BD%A6%E5%95%86%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%92%8C%E8%B4%A2%E5%8A%A1%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7.png" alt="enter description here" title="车商微服务和财务数据一致性.png"></p>
+<ol>
+<li>大量同步RPC依赖，如何保证自身服务可靠性？<br>  服务之间在调用的时候，会存在大量异常、超时。我该如何处理，认为这次是失败的？还是成功的？如果依赖的服务返回成功，才算成功的话，我改如何保证服务可靠性，该如何对我的下游服务提供可靠的服务。<ol>
+<li>调用依赖服务失败，如何降级处理？<br>在服务调用失败的时候，我的上游出错了，我该如何降级处理，我该重试？还是直接跳过，跳过后是否会造成微服务之间数据一致性问题。如果重试是否会造成重复提交，接口是否幂等？<br>3.是否还欠缺回滚机制？ </li>
+</ol>
+</li>
+</ol>
 
       
 
@@ -193,6 +202,11 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式-事务/">分布式,事务</a></li></ul>
+	</div>
+
       
 
       
@@ -243,7 +257,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/02/16/Laravel学习笔记三控制器/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/05/17/微服务数据一致性和服务可靠性/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -257,18 +271,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/03/02/laravel学习笔记四中间件/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          &#39;laravel学习笔记四中间件&#39;
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/02/09/laravel学习笔记二路由/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">&#39;laravel学习笔记二路由&#39;</div>
+    <a href="/2017/11/30/PHPExecel/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHPExcel</div>
       <i class="icon-circle-right"></i>
     </a>
   
