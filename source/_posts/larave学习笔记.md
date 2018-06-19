@@ -1,6 +1,6 @@
 layout: '''laravel'
 title: laravel学习笔记
-date: 2017-02-08 22:10:05
+date: 2016-02-08 22:10:05
 tags:
 ---
 # laravel-  学习笔记

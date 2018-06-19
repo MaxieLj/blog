@@ -133,6 +133,73 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-微服务数据一致性和服务可靠性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/19/微服务数据一致性和服务可靠性/">微服务数据一致性和服务可靠性</a>
+    </h1>
+  
+
+        <a href="/2018/06/19/微服务数据一致性和服务可靠性/" class="archive-article-date">
+  	<time datetime="2018-06-19T11:58:23.447Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-19</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/photo/img/2018-06-19/servicePic1.png" alt="image"></p>
+<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><p>  我们的保证金服务现有结构是这个样子。<br>在 1、2、3、4、5、6 各个阶段都会存在超时和异常问题，当负载少时，我们还可以手动人工处理，但是当数据量大的时候，问题或多的令人发指，沉浸于洗数据，无法自拔。。<br>超时存在问题：<br>1.当1、2、3 步骤超时时，下游服务可以忽略，当做执行失败，重试。<br>2.当在环节4、5、6超时时，对于下游服务是也是执行失败，但是还可以重试么？</p>
+<h2 id="如何提高服务可靠性"><a href="#如何提高服务可靠性" class="headerlink" title="如何提高服务可靠性"></a>如何提高服务可靠性</h2><p>对于上游服务，如何保证对下游提供可靠的服务。</p>
+<h3 id="补偿机制"><a href="#补偿机制" class="headerlink" title="补偿机制"></a>补偿机制</h3><p> <img src="/photo/img/2018-06-19/servicePic5.png" alt="image"><br> 在服务间的调用失败时，可以记录失败调用，如队列，消费重试。但是前提一定是接口幂等。<br> 但是这样并不能解决根本性问题，如果我们在调用保证金冻结服务时，失败此时我们冻结时报操作入队列，让队列异步消费，如果此时要解冻保证金，就会出现业务异常。</p>
+<p> <strong>所以</strong>补偿机制建议使用在 <code>不可避免的业务异常情况下使用</code>，我们应该尽可能的优化技术方案，来保证数据一致性，最后再采用补偿机制。</p>
+<h3 id="两段提交协议（2pc）"><a href="#两段提交协议（2pc）" class="headerlink" title="两段提交协议（2pc）"></a>两段提交协议（2pc）</h3><p><img src="/photo/img/2018-06-19/servicePic4.png" alt="image"></p>
+<p>preOperation 执行请求，在调用微服务前，执行预操作成功则表示此次操作可行。<br>如果commit失败该如何处理？重新preOperetion嘛？如果接口幂等是否可以重复，commit？如何保证避免重复提交？<br>在preOperation时，返回唯一操作ID，业务逻辑每个操作对应一个操作ID，commit失败就重试，当然前提是我们的上有服务接口幂等。</p>
+<p><img src="/photo/img/2018-06-19/servicePic3.png" alt="image"><br>即使是这样也会存在问题，如果保证金预操作成功，但是执行一直失败呢？我们必须提供回滚机制。<br><img src="/photo/img/2018-06-19/servicePic2.png" alt="image"></p>
+<ol>
+<li>大量同步RPC依赖，如何保证自身服务可靠性？<br>  服务之间在调用的时候，会存在大量异常、超时。我该如何处理，认为这次是失败的？还是成功的？如果依赖的服务返回成功，才算成功的话，我改如何保证服务可靠性，该如何对我的下游服务提供可靠的服务。<ol>
+<li>调用依赖服务失败，如何降级处理？<br>在服务调用失败的时候，我的上游出错了，我该如何降级处理，我该重试？还是直接跳过，跳过后是否会造成微服务之间数据一致性问题。如果重试是否会造成重复提交，接口是否幂等？<br>3.是否还欠缺回滚机制？ </li>
+</ol>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式-事务/">分布式,事务</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/19/微服务数据一致性和服务可靠性/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-websocket订阅火币成交记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -176,129 +243,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/06/19/websocket订阅火币成交记录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-微服务数据一致性和服务可靠性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/17/微服务数据一致性和服务可靠性/">微服务数据一致性和服务可靠性</a>
-    </h1>
-  
-
-        <a href="/2018/05/17/微服务数据一致性和服务可靠性/" class="archive-article-date">
-  	<time datetime="2018-05-17T03:28:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="./images/%E4%BF%9D%E8%AF%81%E9%87%91%E6%9C%8D%E5%8A%A1-2-2.png" alt="enter description here" title="保证金服务-2-2.png"></p>
-<h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><p>  我们的保证金服务现有结构是这个样子。<br>在 1、2、3、4、5、6 各个阶段都会存在超时和异常问题，当负载少时，我们还可以手动人工处理，但是当数据量大的时候，问题或多的令人发指，沉浸于洗数据，无法自拔。。<br>超时存在问题：<br>1.当1、2、3 步骤超时时，下游服务可以忽略，当做执行失败，重试。<br>2.当在环节4、5、6超时时，对于下游服务是也是执行失败，但是还可以重试么？</p>
-<h2 id="如何提高服务可靠性"><a href="#如何提高服务可靠性" class="headerlink" title="如何提高服务可靠性"></a>如何提高服务可靠性</h2><p>对于上游服务，如何保证对下游提供可靠的服务。</p>
-<h3 id="补偿机制"><a href="#补偿机制" class="headerlink" title="补偿机制"></a>补偿机制</h3><p> <img src="./images/%E8%A1%A5%E5%81%BF%E6%9C%BA%E5%88%B6.png" alt="enter description here" title="补偿机制.png"><br> 在服务间的调用失败时，可以记录失败调用，如队列，消费重试。但是前提一定是接口幂等。<br> 但是这样并不能解决根本性问题，如果我们在调用保证金冻结服务时，失败此时我们冻结时报操作入队列，让队列异步消费，如果此时要解冻保证金，就会出现业务异常。</p>
-<p> <strong>所以</strong>补偿机制建议使用在 <code>不可避免的业务异常情况下使用</code>，我们应该尽可能的优化技术方案，来保证数据一致性，最后再采用补偿机制。</p>
-<h3 id="两段提交协议（2pc）"><a href="#两段提交协议（2pc）" class="headerlink" title="两段提交协议（2pc）"></a>两段提交协议（2pc）</h3><p><img src="./images/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6_2.png" alt="enter description here" title="未命名文件.png"></p>
-<p>preOperation 执行请求，在调用微服务前，执行预操作成功则表示此次操作可行。<br>如果commit失败该如何处理？重新preOperetion嘛？如果接口幂等是否可以重复，commit？如何保证避免重复提交？<br>在preOperation时，返回唯一操作ID，业务逻辑每个操作对应一个操作ID，commit失败就重试，当然前提是我们的上有服务接口幂等。</p>
-<p><img src="./images/%E8%BD%A6%E5%95%86%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%92%8C%E8%B4%A2%E5%8A%A1%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7.png" alt="enter description here" title="车商微服务和财务数据一致性.png"></p>
-<ol>
-<li>大量同步RPC依赖，如何保证自身服务可靠性？<br>  服务之间在调用的时候，会存在大量异常、超时。我该如何处理，认为这次是失败的？还是成功的？如果依赖的服务返回成功，才算成功的话，我改如何保证服务可靠性，该如何对我的下游服务提供可靠的服务。<ol>
-<li>调用依赖服务失败，如何降级处理？<br>在服务调用失败的时候，我的上游出错了，我该如何降级处理，我该重试？还是直接跳过，跳过后是否会造成微服务之间数据一致性问题。如果重试是否会造成重复提交，接口是否幂等？<br>3.是否还欠缺回滚机制？ </li>
-</ol>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式-事务/">分布式,事务</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/17/微服务数据一致性和服务可靠性/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-PHPExecel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/30/PHPExecel/">PHPExcel</a>
-    </h1>
-  
-
-        <a href="/2017/11/30/PHPExecel/" class="archive-article-date">
-  	<time datetime="2017-11-30T02:42:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="PHPEXcel"><a href="#PHPEXcel" class="headerlink" title="PHPEXcel"></a>PHPEXcel</h1><hr>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在工作中我们肯定会遇到由于后端管理系统不完善，而导致运营同学无法从管理系统获取想要的数据。亦或程序设计之初没有考虑到完善，导致一些必要的数据没有录入，希望后续补充批量导入。在这个时候我们就需要获取从数据批量导出数据或者导入数据，而无论导入还是导出数据，我们都希望是Excel格式。</p>
-<h2 id="根据Execel生成sql"><a href="#根据Execel生成sql" class="headerlink" title="根据Execel生成sql"></a>根据Execel生成sql</h2><p>1.PHPExcel</p>
-<p>准备：我们需要从github获取PHPExcel工具包。地址 <code>https://github.com/PHPOffice/PHPExcel</code> </p>
-<p>打开PHPExcel文件夹，看下代码结构。我们需要的主要代码在<code>Classes</code>文件下，我们只需要引入<code>PHPExcel.php</code>即可。</p>
-<p>代码实现<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include</span> <span class="string">'./code/web_code/PHPExcel/Classes/PHPExcel.php'</span>;<span class="comment">//引入必要的第三方依赖</span></div><div class="line">$inputFileType = <span class="string">'Excel2007'</span>;<span class="comment">//设置Excel的版本</span></div><div class="line">$inputFileName = <span class="string">'./targe.xlsx'</span>;<span class="comment">// 需要导入文件地址</span></div><div class="line"></div><div class="line"></div><div class="line">$currentsheet = $objPHPExcel-&gt;getSheet(<span class="number">0</span>); <span class="comment">//选择Excel页</span></div><div class="line">$maxColumn = $currentsheet-&gt;getHighestColumn(); <span class="comment">//获取当前页的最大列数</span></div><div class="line">$maxRow = $currentsheet-&gt;getHighestRow(); <span class="comment">//获取当前页的最大行数</span></div><div class="line"></div><div class="line"><span class="comment">//循环拼接sql</span></div><div class="line"><span class="keyword">for</span> ($i=<span class="number">2</span>; $i&lt; $maxRow; $i++) &#123; </div><div class="line">    <span class="comment">//过滤条件</span></div><div class="line">     <span class="keyword">if</span>(is_null($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue())||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue()== <span class="string">'已退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'待退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'已经申请退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'退了'</span> ||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'没有电话'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'0'</span>) &#123;</div><div class="line"></div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="comment">//过滤条件</span></div><div class="line">     <span class="keyword">if</span>(!is_numeric($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue())||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'0'</span> || <span class="keyword">empty</span>($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue()) || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">''</span>) &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">    $sql_bd_name .= <span class="string">' WHEN '</span>.$currentsheet-&gt;getCell(<span class="string">'A'</span>.$i)-&gt;getValue().<span class="string">' THEN '</span>.$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue();</div><div class="line">    $sql_bd_name .= <span class="string">','</span>.$currentsheet-&gt;getCell(<span class="string">'A'</span>.$i)-&gt;getValue();</div><div class="line">    $res +=<span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//输入，当然这里无论我们用fopen或者其他的输入当属都可以，这里我把结果打到了控制台。</span></div><div class="line"><span class="keyword">echo</span> $sql_bd_name;</div><div class="line"><span class="keyword">echo</span> $res</div></pre></td></tr></table></figure></p>
-<p>我们生成的sql是<code>WHEN</code>  <code>THEN</code>的样式，完整语句应该是 update tablename set seller_jn_activity CASE id<br>WHEN 1 TEHN 2<br>END,<br>bd_jn_activity CASE id<br>when 2 THEN 3<br>END<br>WHERE in (1,2,3)</p>
-<p>发现数据清洗其实是一件很麻烦的事。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/30/PHPExecel/">展开全文 >></a>
         </p>
       
 
@@ -387,6 +331,62 @@
 
 
   
+    <article id="post-PHPExecel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/30/PHPExecel/">PHPExcel</a>
+    </h1>
+  
+
+        <a href="/2017/10/30/PHPExecel/" class="archive-article-date">
+  	<time datetime="2017-10-30T02:42:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-30</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PHPEXcel"><a href="#PHPEXcel" class="headerlink" title="PHPEXcel"></a>PHPEXcel</h1><hr>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在工作中我们肯定会遇到由于后端管理系统不完善，而导致运营同学无法从管理系统获取想要的数据。亦或程序设计之初没有考虑到完善，导致一些必要的数据没有录入，希望后续补充批量导入。在这个时候我们就需要获取从数据批量导出数据或者导入数据，而无论导入还是导出数据，我们都希望是Excel格式。</p>
+<h2 id="根据Execel生成sql"><a href="#根据Execel生成sql" class="headerlink" title="根据Execel生成sql"></a>根据Execel生成sql</h2><p>1.PHPExcel</p>
+<p>准备：我们需要从github获取PHPExcel工具包。地址 <code>https://github.com/PHPOffice/PHPExcel</code> </p>
+<p>打开PHPExcel文件夹，看下代码结构。我们需要的主要代码在<code>Classes</code>文件下，我们只需要引入<code>PHPExcel.php</code>即可。</p>
+<p>代码实现<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include</span> <span class="string">'./code/web_code/PHPExcel/Classes/PHPExcel.php'</span>;<span class="comment">//引入必要的第三方依赖</span></div><div class="line">$inputFileType = <span class="string">'Excel2007'</span>;<span class="comment">//设置Excel的版本</span></div><div class="line">$inputFileName = <span class="string">'./targe.xlsx'</span>;<span class="comment">// 需要导入文件地址</span></div><div class="line"></div><div class="line"></div><div class="line">$currentsheet = $objPHPExcel-&gt;getSheet(<span class="number">0</span>); <span class="comment">//选择Excel页</span></div><div class="line">$maxColumn = $currentsheet-&gt;getHighestColumn(); <span class="comment">//获取当前页的最大列数</span></div><div class="line">$maxRow = $currentsheet-&gt;getHighestRow(); <span class="comment">//获取当前页的最大行数</span></div><div class="line"></div><div class="line"><span class="comment">//循环拼接sql</span></div><div class="line"><span class="keyword">for</span> ($i=<span class="number">2</span>; $i&lt; $maxRow; $i++) &#123; </div><div class="line">    <span class="comment">//过滤条件</span></div><div class="line">     <span class="keyword">if</span>(is_null($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue())||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue()== <span class="string">'已退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'待退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'已经申请退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'退了'</span> ||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'没有电话'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'0'</span>) &#123;</div><div class="line"></div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="comment">//过滤条件</span></div><div class="line">     <span class="keyword">if</span>(!is_numeric($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue())||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'0'</span> || <span class="keyword">empty</span>($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue()) || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">''</span>) &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">    $sql_bd_name .= <span class="string">' WHEN '</span>.$currentsheet-&gt;getCell(<span class="string">'A'</span>.$i)-&gt;getValue().<span class="string">' THEN '</span>.$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue();</div><div class="line">    $sql_bd_name .= <span class="string">','</span>.$currentsheet-&gt;getCell(<span class="string">'A'</span>.$i)-&gt;getValue();</div><div class="line">    $res +=<span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//输入，当然这里无论我们用fopen或者其他的输入当属都可以，这里我把结果打到了控制台。</span></div><div class="line"><span class="keyword">echo</span> $sql_bd_name;</div><div class="line"><span class="keyword">echo</span> $res</div></pre></td></tr></table></figure></p>
+<p>我们生成的sql是<code>WHEN</code>  <code>THEN</code>的样式，完整语句应该是 update tablename set seller_jn_activity CASE id<br>WHEN 1 TEHN 2<br>END,<br>bd_jn_activity CASE id<br>when 2 THEN 3<br>END<br>WHERE in (1,2,3)</p>
+<p>发现数据清洗其实是一件很麻烦的事。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/30/PHPExecel/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-laravel学习笔记四中间件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -394,12 +394,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/02/laravel学习笔记四中间件/">&#39;laravel学习笔记四中间件&#39;</a>
+      <a class="article-title" href="/2016/03/02/laravel学习笔记四中间件/">&#39;laravel学习笔记四中间件&#39;</a>
     </h1>
   
 
-        <a href="/2017/03/02/laravel学习笔记四中间件/" class="archive-article-date">
-  	<time datetime="2017-03-02T11:44:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-02</time>
+        <a href="/2016/03/02/laravel学习笔记四中间件/" class="archive-article-date">
+  	<time datetime="2016-03-02T11:44:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-02</time>
 </a>
       </header>
     
@@ -437,7 +437,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/02/laravel学习笔记四中间件/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/03/02/laravel学习笔记四中间件/">展开全文 >></a>
         </p>
       
 
@@ -462,12 +462,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/16/Laravel学习笔记三控制器/">Laravel学习笔记三控制器</a>
+      <a class="article-title" href="/2016/02/16/Laravel学习笔记三控制器/">Laravel学习笔记三控制器</a>
     </h1>
   
 
-        <a href="/2017/02/16/Laravel学习笔记三控制器/" class="archive-article-date">
-  	<time datetime="2017-02-16T13:26:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-16</time>
+        <a href="/2016/02/16/Laravel学习笔记三控制器/" class="archive-article-date">
+  	<time datetime="2016-02-16T13:26:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-16</time>
 </a>
       </header>
     
@@ -496,7 +496,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/16/Laravel学习笔记三控制器/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/02/16/Laravel学习笔记三控制器/">展开全文 >></a>
         </p>
       
 
@@ -521,12 +521,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/09/laravel学习笔记二路由/">&#39;laravel学习笔记二路由&#39;</a>
+      <a class="article-title" href="/2016/02/09/laravel学习笔记二路由/">&#39;laravel学习笔记二路由&#39;</a>
     </h1>
   
 
-        <a href="/2017/02/09/laravel学习笔记二路由/" class="archive-article-date">
-  	<time datetime="2017-02-09T14:09:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-09</time>
+        <a href="/2016/02/09/laravel学习笔记二路由/" class="archive-article-date">
+  	<time datetime="2016-02-09T14:09:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-09</time>
 </a>
       </header>
     
@@ -567,7 +567,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/09/laravel学习笔记二路由/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/02/09/laravel学习笔记二路由/">展开全文 >></a>
         </p>
       
 
@@ -592,12 +592,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/08/larave学习笔记/">laravel学习笔记</a>
+      <a class="article-title" href="/2016/02/08/larave学习笔记/">laravel学习笔记</a>
     </h1>
   
 
-        <a href="/2017/02/08/larave学习笔记/" class="archive-article-date">
-  	<time datetime="2017-02-08T14:10:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-08</time>
+        <a href="/2016/02/08/larave学习笔记/" class="archive-article-date">
+  	<time datetime="2016-02-08T14:10:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-08</time>
 </a>
       </header>
     
@@ -638,7 +638,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/08/larave学习笔记/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/02/08/larave学习笔记/">展开全文 >></a>
         </p>
       
 
@@ -663,12 +663,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/26/github/">github</a>
+      <a class="article-title" href="/2015/06/26/github/">github</a>
     </h1>
   
 
-        <a href="/2016/12/26/github/" class="archive-article-date">
-  	<time datetime="2016-12-26T14:04:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-26</time>
+        <a href="/2015/06/26/github/" class="archive-article-date">
+  	<time datetime="2015-06-26T14:04:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-06-26</time>
 </a>
       </header>
     
@@ -711,7 +711,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/26/github/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/06/26/github/">展开全文 >></a>
         </p>
       
 
@@ -736,12 +736,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/19/hexo-git-github搭建博客/">hexo git github搭建博客</a>
+      <a class="article-title" href="/2015/06/02/hexo-git-github搭建博客/">hexo git github搭建博客</a>
     </h1>
   
 
-        <a href="/2016/12/19/hexo-git-github搭建博客/" class="archive-article-date">
-  	<time datetime="2016-12-19T13:48:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-19</time>
+        <a href="/2015/06/02/hexo-git-github搭建博客/" class="archive-article-date">
+  	<time datetime="2015-06-02T13:48:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-06-02</time>
 </a>
       </header>
     
@@ -817,7 +817,7 @@ $ git config --global user.email &quot;你的邮箱&quot;
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/19/hexo-git-github搭建博客/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/06/02/hexo-git-github搭建博客/">展开全文 >></a>
         </p>
       
 
