@@ -133,6 +133,70 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-我不是药神" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/13/我不是药神/">我不是药神</a>
+    </h1>
+  
+
+        <a href="/2018/07/13/我不是药神/" class="archive-article-date">
+  	<time datetime="2018-07-13T14:44:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-13</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一直以来都想成为一个坚强的人,但是生活中还是有很多时候让我情不自禁,一部电影被感动哭的稀里哗啦,<br>不得不承认我是个泪点很低的人,但是我想这并不妨碍我成为一个坚强的人。</p>
+<p>看完点影,不禁想问自己几个问题:</p>
+<ul>
+<li>电影里徐峥错了么?好像并没有什么大错。尊重知识产权确实一个严肃的问题,不然社会没有前进的动力。</li>
+<li>警察错了么? 好像也没有错,秉公执法的警察才是好警察。</li>
+<li>病人错了么? 明明知道这是走私药,却仍然要买,我想对于想要活命的人来说,什么都无足轻重了。<br>只有哪些真正历过生离死别,一直在生与死的边缘挣扎的人, 才知道生命的可贵。</li>
+</ul>
+<p>到底是哪里错了? 我想真的事像电影里所说的一样, 都是因为穷。如果穷是原罪的话,我想这个世界大多数人都犯了很重的罪。<br>那么错在哪里, 我想我们的国家体制已经意识到了,她在改变。</p>
+<ul>
+<li>黄毛是个仗义的兄弟, 看到了黄毛, 这不禁让我想到我的高中, 想到了当我处于和别人争执的时候那些为我站出来的朋友。</li>
+</ul>
+<p>我想我一直是一个不善于表达的人, 无论对于父母, 伴侣, 还是朋友, 对于他们我一直都很吝啬赞美之词。</p>
+<ul>
+<li>最后一个问题, 如果我是徐峥, 我会站出来么? 当我事业有成的时候, 衣食无忧的时候, 家庭美满的时候, 我会为那些<br>需要帮助的人站出来么?</li>
+</ul>
+<p>但是我知道, 那些站出来的背影真的很帅, 也值得我们尊敬。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/13/我不是药神/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-微服务数据一致性和服务可靠性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -140,12 +204,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/19/微服务数据一致性和服务可靠性/">微服务数据一致性和服务可靠性</a>
+      <a class="article-title" href="/2018/07/12/微服务数据一致性和服务可靠性/">微服务数据一致性和服务可靠性</a>
     </h1>
   
 
-        <a href="/2018/06/19/微服务数据一致性和服务可靠性/" class="archive-article-date">
-  	<time datetime="2018-06-19T11:58:23.447Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-19</time>
+        <a href="/2018/07/12/微服务数据一致性和服务可靠性/" class="archive-article-date">
+  	<time datetime="2018-07-12T13:54:30.353Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-12</time>
 </a>
       </header>
     
@@ -160,10 +224,9 @@
 <p>preOperation 执行请求，在调用微服务前，执行预操作成功则表示此次操作可行。<br>如果commit失败该如何处理？重新preOperetion嘛？如果接口幂等是否可以重复，commit？如何保证避免重复提交？<br>在preOperation时，返回唯一操作ID，业务逻辑每个操作对应一个操作ID，commit失败就重试，当然前提是我们的上有服务接口幂等。</p>
 <p><img src="/photo/img/2018-06-19/servicePic3.png" alt="image"><br>即使是这样也会存在问题，如果保证金预操作成功，但是执行一直失败呢？我们必须提供回滚机制。<br><img src="/photo/img/2018-06-19/servicePic2.png" alt="image"></p>
 <ol>
-<li>大量同步RPC依赖，如何保证自身服务可靠性？<br>  服务之间在调用的时候，会存在大量异常、超时。我该如何处理，认为这次是失败的？还是成功的？如果依赖的服务返回成功，才算成功的话，我改如何保证服务可靠性，该如何对我的下游服务提供可靠的服务。<ol>
-<li>调用依赖服务失败，如何降级处理？<br>在服务调用失败的时候，我的上游出错了，我该如何降级处理，我该重试？还是直接跳过，跳过后是否会造成微服务之间数据一致性问题。如果重试是否会造成重复提交，接口是否幂等？<br>3.是否还欠缺回滚机制？ </li>
-</ol>
-</li>
+<li>大量同步RPC依赖，如何保证自身服务可靠性？<br>  服务之间在调用的时候，会存在大量异常、超时。我该如何处理，认为这次是失败的？还是成功的？如果依赖的服务返回成功，才算成功的话，我改如何保证服务可靠性，该如何对我的下游服务提供可靠的服务。</li>
+<li>调用依赖服务失败，如何降级处理？<br>  在服务调用失败的时候，我的上游出错了，我该如何降级处理，我该重试？还是直接跳过，跳过后是否会造成微服务之间数据一致性问题。如果重试是否会造成重复提交，接口是否幂等？</li>
+<li>是否还欠缺回滚机制？ </li>
 </ol>
 
       
@@ -182,7 +245,173 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/19/微服务数据一致性和服务可靠性/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/07/12/微服务数据一致性和服务可靠性/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-使用sz-rz命令从服务下载上传文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/12/使用sz-rz命令从服务下载上传文件/">Item2使用sz rz命令从服务下载上传文件</a>
+    </h1>
+  
+
+        <a href="/2018/07/12/使用sz-rz命令从服务下载上传文件/" class="archive-article-date">
+  	<time datetime="2018-07-12T13:27:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-12</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>如何从linux服务下载/上传文件</p>
+<ul>
+<li>使用scp命令</li>
+<li>使用sz命令</li>
+</ul>
+<p>这里主要介绍使用sz命令下载文件</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>安装lrzsz <code>hobrew install llssz</code></li>
+<li>在本地编写shell用于接受sz命令下载下来的文件</li>
+</ul>
+<p>上传shell</p>
+<p><code>iterm2-send-zmodem.sh</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"></div><div class="line">#Author: Matt Mastracci (matthew@mastracci.com)</div><div class="line"></div><div class="line"></div><div class="line"># AppleScript from http://stackoverflow.com/questions/4309087/cancel-button-on-osascript-in-a-bash-script</div><div class="line"></div><div class="line"></div><div class="line"># licensed under cc-wiki with attribution required</div><div class="line"></div><div class="line"></div><div class="line"># Remainder of script public domain</div><div class="line"></div><div class="line"></div><div class="line">osascript -e &apos;tell application &quot;iTerm2&quot; to version&apos; &gt; /dev/null 2&gt;&amp;1 &amp;&amp; NAME=iTerm2 || NAME=iTerm</div><div class="line">if [[ $NAME = &quot;iTerm&quot; ]]; then</div><div class="line">    FILE=`osascript -e &apos;tell application &quot;iTerm&quot; to activate&apos; -e &apos;tell application &quot;iTerm&quot; to set thefile to choose file with prompt &quot;Choose a file to send&quot;&apos; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</div><div class="line">else</div><div class="line">    FILE=`osascript -e &apos;tell application &quot;iTerm2&quot; to activate&apos; -e &apos;tell application &quot;iTerm2&quot; to set thefile to choose file with prompt &quot;Choose a file to send&quot;&apos; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</div><div class="line">fi</div><div class="line">if [[ $FILE = &quot;&quot; ]]; then</div><div class="line">    echo Cancelled.</div><div class="line">    # Send ZModem cancel</div><div class="line">    echo -e \\x18\\x18\\x18\\x18\\x18</div><div class="line">    sleep 1</div><div class="line">    echo</div><div class="line">    echo \# Cancelled transfer</div><div class="line">else</div><div class="line">    /usr/local/bin/sz &quot;$FILE&quot; -e -b</div><div class="line">    sleep 1</div><div class="line">    echo</div><div class="line">    echo \# Received $FILE</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p>下载shell</p>
+<p><code>iterm2-recv-zmodem.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># Author: Matt Mastracci (matthew@mastracci.com)</div><div class="line"># AppleScript from http://stackoverflow.com/questions/4309087/cancel-button-on-osascript-in-a-bash-script</div><div class="line"># licensed under cc-wiki with attribution required </div><div class="line"># Remainder of script public domain</div><div class="line"></div><div class="line">osascript -e &apos;tell application &quot;iTerm2&quot; to version&apos; &gt; /dev/null 2&gt;&amp;1 &amp;&amp; NAME=iTerm2 || NAME=iTerm</div><div class="line">if [[ $NAME = &quot;iTerm&quot; ]]; then</div><div class="line">    FILE=`osascript -e &apos;tell application &quot;iTerm&quot; to activate&apos; -e &apos;tell application &quot;iTerm&quot; to set thefile to choose folder with prompt &quot;Choose a folder to place received files in&quot;&apos; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</div><div class="line">else</div><div class="line">    FILE=`osascript -e &apos;tell application &quot;iTerm2&quot; to activate&apos; -e &apos;tell application &quot;iTerm2&quot; to set thefile to choose folder with prompt &quot;Choose a folder to place received files in&quot;&apos; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</div><div class="line">fi</div><div class="line"></div><div class="line">if [[ $FILE = &quot;&quot; ]]; then</div><div class="line">    echo Cancelled.</div><div class="line">    # Send ZModem cancel</div><div class="line">    echo -e \\x18\\x18\\x18\\x18\\x18</div><div class="line">    sleep 1</div><div class="line">    echo</div><div class="line">    echo \# Cancelled transfer</div><div class="line">else</div><div class="line">    cd &quot;$FILE&quot;</div><div class="line">    /usr/local/bin/rz -E -e -b</div><div class="line">    sleep 1</div><div class="line">    echo</div><div class="line">    echo</div><div class="line">    echo \# Sent \-\&gt; $FILE</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="配置iterm2"><a href="#配置iterm2" class="headerlink" title="配置iterm2"></a>配置iterm2</h2><ul>
+<li>设置Iterm2的Tirgger特性，profiles-default-editProfiles-Advanced中的Tirgger</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">添加两条trigger，分别设置Regular expression，Action，Parameters，Instant如下：</div><div class="line">    1.第一条</div><div class="line">        Regular expression: rz waiting to receive.\*\*B0100</div><div class="line">        Action: Run Silent Coprocess</div><div class="line">        Parameters: /usr/local/bin/iterm2-send-zmodem.sh</div><div class="line">        Instant: checked</div><div class="line">    2.第二条</div><div class="line">        Regular expression: \*\*B00000000000000</div><div class="line">        Action: Run Silent Coprocess</div><div class="line">        Parameters: /usr/local/bin/iterm2-recv-zmodem.sh</div><div class="line">        Instant: checked</div></pre></td></tr></table></figure>
+<p><strong>备注</strong>:注意两个文件的权限</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/12/使用sz-rz命令从服务下载上传文件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-python学习笔记一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/06/python学习笔记一/">python学习笔记一</a>
+    </h1>
+  
+
+        <a href="/2018/07/06/python学习笔记一/" class="archive-article-date">
+  	<time datetime="2018-07-06T09:43:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-06</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在php里数组分为索引数组和关联数组<br>但sss是在python里这两者数组确实不同的数据类型<br>list:<br>data = [1,2,3,4,5]<br>字典<br>{data:1}</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/06/python学习笔记一/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-solr-从控制页面删除数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/21/solr-从控制页面删除数据/">solr-从控制页面删除数据</a>
+    </h1>
+  
+
+        <a href="/2018/06/21/solr-从控制页面删除数据/" class="archive-article-date">
+  	<time datetime="2018-06-21T12:21:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-21</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-xml"><a href="#1-xml" class="headerlink" title="1.xml"></a>1.xml</h1><p><img src="/photo/img/2018-06-21/DingTalk20180621202319.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;delete&gt;&lt;query&gt;*:*&lt;/query&gt;&lt;/delete&gt;</div><div class="line">&lt;commit/&gt;</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/21/solr-从控制页面删除数据/">展开全文 >></a>
         </p>
       
 
@@ -514,327 +743,10 @@
 
 
   
-    <article id="post-laravel学习笔记二路由" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/09/laravel学习笔记二路由/">&#39;laravel学习笔记二路由&#39;</a>
-    </h1>
-  
-
-        <a href="/2016/02/09/laravel学习笔记二路由/" class="archive-article-date">
-  	<time datetime="2016-02-09T14:09:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-09</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>laravel框架安装好之后我们就要开始熟悉laravel框架的内部结构。<br>我们主要是从这个几个方便来学习laravel：</p>
-<ul>
-<li>route 路由</li>
-<li>controller 控制器</li>
-<li>blade 模板</li>
-<li>model 模型</li>
-</ul>
-<p>今天我们主要讲路由。</p>
-<h3 id="laravel-route"><a href="#laravel-route" class="headerlink" title="laravel-route"></a>laravel-route</h3><p>可能我们在学习laravel之前已经接触过一些框架例如：yii，tp,ci。<br>但是他们都没有laravel所带的路由系统强大，我们现在开始介绍laravel框架的路由。</p>
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>最基本的路由接受的是一个闭包函数，直接返回值，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Roure::get(&apos;/&apos;,funcition()&#123;</div><div class="line">return &apos;this is Route&apos;&#125;)</div></pre></td></tr></table></figure></p>
-<p>我们在 <strong>/routes/web.php</strong> 里注册该路由即可返回 <code>this us Route</code>。当然laravel路由所能接受的请求方式不仅仅是get还要post put 等等法法，示例如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Route::get($uri, $callback);</div><div class="line">Route::post($uri, $callback);</div><div class="line">Route::put($uri, $callback);</div><div class="line">Route::patch($uri, $callback);</div><div class="line">Route::delete($uri, $callback);</div><div class="line">Route::options($uri, $callback);</div></pre></td></tr></table></figure></p>
-<h3 id="带参数访问"><a href="#带参数访问" class="headerlink" title="带参数访问"></a>带参数访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Roure::get(&apos;/&#123;id&#125;&apos;,function($id)&#123;</div><div class="line">return &apos;user id is &apos;.$id</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p> 当然也可以带多参数访问</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;/id/&#123;id&#125;/name/&#123;name&#125;&apos;,function($id,$name)&#123;</div><div class="line">//</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p> 让然也可以传递一个可选参数 ,但是我们需要用<code>？</code>来标记该参数，还给予他默认值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;/name/&#123;name&#125;?&apos;,function($name=&apos;Maxie&apos;)&#123;</div><div class="line">//</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<h3 id="路由命名"><a href="#路由命名" class="headerlink" title="路由命名"></a>路由命名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Roure::get(&apos;/&apos;,funcition()&#123;</div><div class="line">return &apos;this is Route&apos;&#125;)-&gt;name(&apos;index&apos;)</div></pre></td></tr></table></figure>
-<p>我们可以给路由命名一个名字，让我们在模板中使用rul函数可以解析到我们所命名的路由<code>url(&#39;index&#39;)</code>。这些我们在模板中在细讲</p>
-<h3 id="路由群组"><a href="#路由群组" class="headerlink" title="路由群组"></a>路由群组</h3><p>路由群组是一个很好东西，我们在开发中很定会给我们的项目分不同模块。例如用户模块，商户模块。这时候我么会给他们加上不同的命名空间，我们可以通过路由群组把我们注册的路由也分类，很方便我们的访问。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::groun([&apos;namespace&apos;=&gt;&apos;user&apos;],function()&#123;</div><div class="line">//我们可以在此注册我们的路由，路由控制器路由会在App/Http/Controller/user 下</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<p> 当让我们可以在群组里继续注册群组，在这里我们不多做演示。</p>
-<h2 id="路由绑定到控制器"><a href="#路由绑定到控制器" class="headerlink" title="路由绑定到控制器"></a>路由绑定到控制器</h2><p>这是我们最关键的地方，一般我们通过访问URI都会想传递参数给我们的控制器，当然laravel还给我们提供了中间件让我们在路路由控制器之间或者路由玉模板之前做一个参数处理或者过滤，我们在此不做演示。后边我们会详细解释，现在我们详细解释路由有绑定到控制器，想必这是你我最关系的。<br>路由绑定到控制器只需要：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Roure::get(&apos;/&apos;,&apos;UserController@showProfile&apos;)</div></pre></td></tr></table></figure></p>
-<p>这样既可绑定我么你的路由到控制器。</p>
-<h2 id="路由绑定绑定到视图"><a href="#路由绑定绑定到视图" class="headerlink" title="路由绑定绑定到视图"></a>路由绑定绑定到视图</h2><p>有很多的访问不需要我们做处理，只需展示一些东西既可，我么你可以直接把路由绑定到视图</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;/&apos;,function()&#123;</div><div class="line">return view(&apos;welcom&apos;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">这也是我们刚刚配置完laravel时候路由web.php唯一注册一个路由</div></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/09/laravel学习笔记二路由/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="&#39;laravel-larave学习笔记" class="article article-type-&#39;laravel  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/08/larave学习笔记/">laravel学习笔记</a>
-    </h1>
-  
-
-        <a href="/2016/02/08/larave学习笔记/" class="archive-article-date">
-  	<time datetime="2016-02-08T14:10:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-08</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="laravel-学习笔记"><a href="#laravel-学习笔记" class="headerlink" title="laravel-  学习笔记"></a>laravel-  学习笔记</h1><hr>
-<p>laravel最近新冒出来的一个框架，在国外已经风靡，但是在国内却并没有流行起来。我想造成这种原因可能有几点：</p>
-<ol>
-<li>国内从业人员英语基础普遍偏差，没有系统阅读文档的能力</li>
-<li>主动学习积极性较差</li>
-<li><p>固守于已经学会的知识</p>
-<p>以此为鉴</p>
-</li>
-</ol>
-<h2 id="laravel-配置篇"><a href="#laravel-配置篇" class="headerlink" title="laravel 配置篇"></a>laravel 配置篇</h2><p>lavel 有三种安装方法：</p>
-<ul>
-<li>使用composer安装</li>
-<li>使用laravel安装器安装</li>
-<li>下载解压安装</li>
-</ul>
-<h3 id="composer"><a href="#composer" class="headerlink" title="composer"></a>composer</h3><p>先说第一种，使用composer安装，使用 composer create-project 进行安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer create-project --prefer-dist laravel/laravel blog</div></pre></td></tr></table></figure></p>
-<h3 id="laravel安装器"><a href="#laravel安装器" class="headerlink" title="laravel安装器"></a>laravel安装器</h3><p> 使用laravel安装器首先需要安装laravel安装器，让我们来使用composer安装laravel安装器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer global require &quot;laravel/installer&quot;</div></pre></td></tr></table></figure>
-<p>当然我们在使用laravel安装器安装laravel之前，需要配置PATH环境变量，不然系统找不到laravel安装器<br>laravel安装器默认位置<br>Windows:<br><code>C:\Users\admin\AppData\Roaming\Composer\vendor\bin</code><br>linux:<br><code>~/.composer/vendor/bin</code></p>
-<h3 id="下载解压安装"><a href="#下载解压安装" class="headerlink" title="下载解压安装"></a>下载解压安装</h3><p>因为composer可能被墙，所以golaravel给出了已经集成了所有以来的laravel意见安装包<br>下载地址为<code>http://www.golaravel.com/download/</code></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>laravel所有的配置文件都在根目录conf文件夹下<br>当然我们不能忽视的一个很重的一点，就是要设置laravel的应用key，如果不加以设置，我的会话和其他需要加密的信息将会不安全，让然我们通过composer或者laravel安装器安装的laravel不需要进行配置，因为在我们安装laravel时候composer和laravel已经给我们配置好了，所以通过第三种方法安装laravel的，需要为laravel配置新的key，生成key的方法是，在laravel根目录输入<code>key:generate</code>.<br>laravel所有的配置都是conf文件夹下的，但是为了方便配置，laravel调用根目录的.env,我们配置框架最关键的数据库信息卸载根目录的.env文件里</p>
-<h1 id="开发服务器"><a href="#开发服务器" class="headerlink" title="开发服务器"></a>开发服务器</h1><p>laravel为我们提供了一个简单的开发服务器，当我需要时只需要在跟路面输入命令<code>php artisan serve</code>即可。但是这毕竟是开发使用过的，不能再生产环境中使用。</p>
-<p>#laravel其他<br>laravel还为我们提供很多其他功能，具体我就不在此赘述，需要请看官网。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/02/08/larave学习笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="git-github" class="article article-type-git  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/26/github/">github</a>
-    </h1>
-  
-
-        <a href="/2015/06/26/github/" class="archive-article-date">
-  	<time datetime="2015-06-26T14:04:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-06-26</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="关于Git的使用"><a href="#关于Git的使用" class="headerlink" title="#关于Git的使用  "></a>#关于Git的使用  </h2><h2 id="Git的安装和使用"><a href="#Git的安装和使用" class="headerlink" title="Git的安装和使用"></a>Git的安装和使用</h2><p> 准备工作：</p>
-<blockquote>
-<ul>
-<li>下载git 客户端 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">链接地址</a></li>
-</ul>
-</blockquote>
-<p>下载完毕后，安装一路一下一步。<br>安装完成之后我们开始使用Git<br>使用前我们需要告诉Git，我们是谁。所以需要配置一些信息，来确定我们的身份。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config –global user.name “用户名”</div><div class="line">git config –global user.email “邮箱”</div></pre></td></tr></table></figure>
-<p>第一条命令用来告诉 git 我们的名字（以后链接github）<br>第二条命令用来告诉git 我们的邮箱</p>
-<p>到此我们就可以使用Git了</p>
-<h2 id="链接github"><a href="#链接github" class="headerlink" title="链接github"></a>链接github</h2><p>如果我们希望把自己的项目托管在github我们就需要再做一些配置</p>
-<p>首先我们需要生成ssh,使用以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen –t rsa –C</div></pre></td></tr></table></figure></p>
-<ol>
-<li>然后他提示的默认路径生成一些文件，或者你自己配置路径。 在生成过程中会让你输入密码，可以不输入，一路回车<br>生成完毕后，会在你选择路径下生成两个文件 一个是 .rsa 一个是 .pub 我们这里只需要.pub里的内容 复制里边的内容</li>
-<li>接下来我们需要把文件里的key添加到我们的github账号里。 首先我们登陆我们的github账号。 然后在设置里 NEW SSH KEY 添加描述然后把我们的key复制到里边即可。</li>
-</ol>
-<p>不过在提交之前我们还需要做一些配置来确定我们需要把当前库的代码推送到github账号的哪个库里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:aaa/xxx</div></pre></td></tr></table></figure></p>
-<p>在上边的配置的命令中，aaa表示的我们的github账号。xxx使我们的库文件。<br>以后就可以使用git来进行版本管理和推送到github里了。<br>正常操作代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git status</div><div class="line">git add .</div><div class="line">git commit -a &apos;message&apos;</div><div class="line">git push</div></pre></td></tr></table></figure></p>
-<p>提交完毕。</p>
-<p>如果我们需要在其他电脑上使用我们托管的代码，我们需要使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull</div></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git colne &apos;address&apos;</div></pre></td></tr></table></figure></p>
-<p>来从github上获取我们所需要的代码</p>
-<p>如果在配置过程中出现错误，按照提示的代码解决即可。<br>当然在此如果我们直接使用了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -a</div></pre></td></tr></table></figure></p>
-<p>会弹出来vim窗口，在这里写一些vim的命令<br>在非insert状态下我们使用ctrl+d来批量选择#，然后按d删除</p>
-<p>在飞插入模式写:wq 保存并推出</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/06/26/github/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-hexo-git-github搭建博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/02/hexo-git-github搭建博客/">hexo git github搭建博客</a>
-    </h1>
-  
-
-        <a href="/2015/06/02/hexo-git-github搭建博客/" class="archive-article-date">
-  	<time datetime="2015-06-02T13:48:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-06-02</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>在经搭建个人博客、csnd写博客、博客园写博客一系列折腾之后最终决定用 git github hexo 来搭建自己的个人博。我这样做的原因最主要就这么几点：</p>
-<blockquote>
-<ul>
-<li>github的大环境。（装逼）</li>
-<li>免费稳定1</li>
-<li>有一定的技术含量，我个人喜欢折腾。</li>
-<li>为了保持使用git的习惯，顺带看看新的技术，跟上时代潮流。</li>
-</ul>
-</blockquote>
-<p>**</p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>**<br>需求环境</p>
-<ol>
-<li>git <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git下载地址</a></li>
-<li>node.js <a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js下载地址</a></li>
-</ol>
-<p>两个安装都是一路下一步</p>
-<h2 id="验证软件正确安装"><a href="#验证软件正确安装" class="headerlink" title="验证软件正确安装"></a>验证软件正确安装</h2><pre><code>git --version
-node -v
-npm -v
-</code></pre><p>如果显示版本信息，怎安装成功。</p>
-<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p>在这里如果被墙的可以使用淘宝镜像cnpm 具体怎么操作可以自行百度，这里不多做解释。<br>不过一般不会被墙，我使用npm。运行下边的命令安装hexo：<br>被墙请使用命令：</p>
-<pre><code>npm install -g cnpm --registry=https://registry.npm.taobao.org
-</code></pre><p>以下是没有被墙的命令，被墙把npm换成cnpm即可。安装hexo</p>
-<pre><code>npm install hexo-cli -g
-</code></pre><p>安装完成后，验证是否安装成功。</p>
-<pre><code>hexo -v
-</code></pre><p>新建文件夹yourblog,输入命令</p>
-<pre><code>$ hexo init blog
-$ cd blog
-</code></pre><p>新建博客</p>
-<pre><code>$ hexo new &quot;Hello Hexo&quot;
-</code></pre><p>生成静态页面</p>
-<pre><code>$ hexo generate
-</code></pre><p>运行服务</p>
-<pre><code>$ hexo server
-</code></pre><p>然后打开浏览器输入 localhost:4000 即可访问本地静态页面。</p>
-<h2 id="接下来我们把本地静态页面PUSH到github"><a href="#接下来我们把本地静态页面PUSH到github" class="headerlink" title="接下来我们把本地静态页面PUSH到github"></a>接下来我们把本地静态页面PUSH到github</h2><ul>
-<li>首先你要有github账号。</li>
-<li>新建一个github.io的库</li>
-<li>设置本地github配置参数</li>
-<li>经本地静态页面push到github</li>
-</ul>
-<hr>
-<p> <strong>github设置</strong></p>
-<p>新建github账号就不在这里陈述了，如果有同学不会使用git将代码push到github的话可以参考 <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰的官网</a><br>我们来直接进行第二不，创建一个github.io库。<br>首先登陆我们的github账号点击<code>new repository</code>,然后输入youname.github.io<br><strong>git设置</strong><br>设置git配置信息</p>
-<pre><code>$ git config --global user.name &quot;你的用户名&quot;
-$ git config --global user.email &quot;你的邮箱&quot;
-</code></pre><p><strong>hexo 设置</strong><br>    安装hexo git插件</p>
-<pre><code>npm install hexo-deployer-git --save
-</code></pre><p>然后打开博客根目录的_config.yml文件<br>大致内容是这个样子的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"># Hexo Configuration</div><div class="line">## Docs: https://hexo.io/docs/configuration.html</div><div class="line">## Source: https://github.com/hexojs/hexo/</div><div class="line"></div><div class="line"># Site</div><div class="line">title: 和女票抢可乐</div><div class="line">subtitle:</div><div class="line">description:</div><div class="line">author: MaxieLj</div><div class="line">language:</div><div class="line">timezone:</div><div class="line"></div><div class="line"># URL</div><div class="line">## If your site is put in a subdirectory, set url as &apos;http://yoursite.com/child&apos; and root as &apos;/child/&apos;</div><div class="line">url: http://yoursite.com</div><div class="line">root: /</div><div class="line">permalink: :year/:month/:day/:title/</div><div class="line">permalink_defaults:</div><div class="line"></div><div class="line"># Directory</div><div class="line">source_dir: source</div><div class="line">public_dir: public</div><div class="line">tag_dir: tags</div><div class="line">archive_dir: archives</div><div class="line">category_dir: categories</div><div class="line">code_dir: downloads/code</div><div class="line">i18n_dir: :lang</div><div class="line">skip_render:</div><div class="line"></div><div class="line"># Writing</div><div class="line">new_post_name: :title.md # File name of new posts</div><div class="line">default_layout: post</div><div class="line">titlecase: false # Transform title into titlecase</div><div class="line">external_link: true # Open external links in new tab</div><div class="line">filename_case: 0</div><div class="line">render_drafts: false</div><div class="line">post_asset_folder: false</div><div class="line">relative_link: false</div><div class="line">future: true</div><div class="line">highlight:</div><div class="line">  enable: true</div><div class="line">  line_number: true</div><div class="line">  auto_detect: false</div><div class="line">  tab_replace:</div><div class="line"></div><div class="line"># Category &amp; Tag</div><div class="line">default_category: uncategorized</div><div class="line">category_map:</div><div class="line">tag_map:</div><div class="line"></div><div class="line"># Date / Time format</div><div class="line">## Hexo uses Moment.js to parse and display date</div><div class="line">## You can customize the date format as defined in</div><div class="line">## http://momentjs.com/docs/#/displaying/format/</div><div class="line">date_format: YYYY-MM-DD</div><div class="line">time_format: HH:mm:ss</div><div class="line"></div><div class="line"># Pagination</div><div class="line">## Set per_page to 0 to disable pagination</div><div class="line">per_page: 10</div><div class="line">pagination_dir: page</div><div class="line"></div><div class="line"># Extensions</div><div class="line">## Plugins: https://hexo.io/plugins/</div><div class="line">## Themes: https://hexo.io/themes/</div><div class="line">theme: yilia</div><div class="line"></div><div class="line"># Deployment</div><div class="line">## Docs: https://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/MaxieLj/MaxieLj.github.io.git</div><div class="line">  branch: master</div><div class="line"></div><div class="line">jsonContent:</div><div class="line">  meta: false</div><div class="line">  pages: false</div><div class="line">  posts:</div><div class="line">    title: true</div><div class="line">    date: true</div><div class="line">    path: true</div><div class="line">    text: true</div><div class="line">    raw: false</div><div class="line">    content: false</div><div class="line">    slug: false</div><div class="line">    updated: false</div><div class="line">    comments: false</div><div class="line">    link: false</div><div class="line">    permalink: false</div><div class="line">    excerpt: false</div><div class="line">    categories: false</div><div class="line">    tags: true</div></pre></td></tr></table></figure>
-<p>我们只需要在尾部添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/MaxieLj/MaxieLj.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<p>然后我们运行</p>
-<pre><code>$ hexo g
-</code></pre><p>生成静态文件<br>然后推送到github</p>
-<pre><code>$ hexo d
-</code></pre><p>然后访问youname.github.io就可以看到生成的静态页面了<br>当然我们一般是在本地调试好再用 hexo d推送到github</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/06/02/hexo-git-github搭建博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -887,6 +799,10 @@ $ git config --global user.email &quot;你的邮箱&quot;
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">curl</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">python, shell, crond</a>
