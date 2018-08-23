@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>php数组实现 | 和女票抢可乐</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="要说php的数组,就不得不讲hashtable,以为php的数组是强依赖于hashtable实现的。一般 Times33的算法很简单，就是不断的乘33,下边是times33算法: Times33(hash)12345678910111213141516&amp;lt;?phpfunction myHash($str) ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php数组实现">
+<meta property="og:url" content="http://yoursite.com/2018/08/20/php数组实现/index.html">
+<meta property="og:site_name" content="和女票抢可乐">
+<meta property="og:description" content="要说php的数组,就不得不讲hashtable,以为php的数组是强依赖于hashtable实现的。一般 Times33的算法很简单，就是不断的乘33,下边是times33算法: Times33(hash)12345678910111213141516&amp;lt;?phpfunction myHash($str) &amp;#123;    // hash(i) = hash(i-1) * 33 + str[">
+<meta property="og:image" content="http://yoursite.com/photo/img/php数组实现/php数组具体实现.png">
+<meta property="og:image" content="http://yoursite.com/photo/img/php数组实现/hashtable.png">
+<meta property="og:image" content="http://yoursite.com/photo/img/php数组实现/链表冲突.png">
+<meta property="og:updated_time" content="2018-08-23T10:43:47.946Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php数组实现">
+<meta name="twitter:description" content="要说php的数组,就不得不讲hashtable,以为php的数组是强依赖于hashtable实现的。一般 Times33的算法很简单，就是不断的乘33,下边是times33算法: Times33(hash)12345678910111213141516&amp;lt;?phpfunction myHash($str) &amp;#123;    // hash(i) = hash(i-1) * 33 + str[">
+<meta name="twitter:image" content="http://yoursite.com/photo/img/php数组实现/php数组具体实现.png">
+  
+    <link rel="alternative" href="/atom.xml" title="和女票抢可乐" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://raw.githubusercontent.com/MaxieLj/blog/master/source/b325609689e6e350fab73951048aba5b_xl.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">MaxieLj</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">首页</a></li>
+	        
+				<li><a href="/archives">归档</a></li>
+	        
+				<li><a href="/photo">相册</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/MaxieLj" title="github"><i class="icon-github"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">MaxieLj</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://raw.githubusercontent.com/MaxieLj/blog/master/source/b325609689e6e350fab73951048aba5b_xl.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">MaxieLj</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">首页</a></li>
+		        
+					<li><a href="/archives">归档</a></li>
+		        
+					<li><a href="/photo">相册</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/MaxieLj" title="github"><i class="icon-github"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-php数组实现" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      php数组实现
+    </h1>
+  
+
+        <a href="/2018/08/20/php数组实现/" class="archive-article-date">
+  	<time datetime="2018-08-20T12:00:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>要说php的数组,就不得不讲hashtable,以为php的数组是强依赖于hashtable实现的。一般</p>
+<p>Times33的算法很简单，就是不断的乘33,下边是times33算法:</p>
+<h2 id="Times33-hash"><a href="#Times33-hash" class="headerlink" title="Times33(hash)"></a>Times33(hash)</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHash</span><span class="params">($str)</span> </span>&#123;</div><div class="line">    <span class="comment">// hash(i) = hash(i-1) * 33 + str[i]</span></div><div class="line">    $hash = <span class="number">5381</span>;</div><div class="line">    $s    = md5($str); <span class="comment">//相比其它版本，进行了md5加密</span></div><div class="line">    $seed = <span class="number">5</span>;</div><div class="line">    $len  = <span class="number">32</span>;<span class="comment">//加密后长度32</span></div><div class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $len; $i++) &#123;</div><div class="line">        <span class="comment">// (hash &lt;&lt; 5) + hash 相当于 hash * 33</span></div><div class="line">        <span class="comment">//$hash = sprintf("%u", $hash * 33) + ord($s&#123;$i&#125;);</span></div><div class="line">        <span class="comment">//$hash = ($hash * 33 + ord($s&#123;$i&#125;)) &amp; 0x7FFFFFFF;</span></div><div class="line">        $hash = ($hash &lt;&lt; $seed) + $hash + ord($s&#123;$i&#125;);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="keyword">return</span> $hash &amp; <span class="number">0x7FFFFFFF</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中<code>&lt;&lt;</code> 表示左移,每次左移表示x2例如:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$num = <span class="number">2</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $num &lt;&lt; <span class="number">2</span>;</div></pre></td></tr></table></figure>
+<p>所以($hash &lt;&lt; $seed)表示 $hash <em>32 ,同时加上$hash,也就表示 $hash </em>33了。ord()函数返回字符串的首个字符的 ASCII 值。<br>最后<code>$hash &amp; 0x7FFFFFFF</code> 表示与整形的最大值与操作(<code>0x7FFFF111FFF</code>二进制为<code>1111111111111111111111111111</code>),<br>这个与操作会截取超过整形二进制部分,所以times33计算出来的值不会超过整形的最大值。</p>
+<h2 id="为什么要用hashtable实现php数组"><a href="#为什么要用hashtable实现php数组" class="headerlink" title="为什么要用hashtable实现php数组?"></a>为什么要用hashtable实现php数组?</h2><p>因为散列表是根据关键建码值直接进项访问的数据结构。在key和value之间有一个映射函数,可以根据key直接索引到对应的value值,它并<br>不会使用一般的对比操作,而是直接使用<code>内存的起始位置和偏移位置</code>进行寻址,所以会比正常的寻址要快。</p>
+<h2 id="散列表结构"><a href="#散列表结构" class="headerlink" title="散列表结构"></a>散列表结构</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> _zend_array &#123;</div><div class="line">	zend_refcounted_h gc;</div><div class="line">	<span class="keyword">union</span> &#123;</div><div class="line">		<span class="keyword">struct</span> &#123;</div><div class="line">			ZEND_ENDIAN_LOHI_4(</div><div class="line">				zend_uchar    flags,</div><div class="line">				zend_uchar    nApplyCount,</div><div class="line">				zend_uchar    nIteratorsCount,</div><div class="line">				zend_uchar    reserve)</div><div class="line">		&#125; v;</div><div class="line">		<span class="keyword">uint32_t</span> flags;</div><div class="line">	&#125; u;</div><div class="line">	<span class="keyword">uint32_t</span>          nTableMask;</div><div class="line">	Bucket           *arData;</div><div class="line">	<span class="keyword">uint32_t</span>          nNumUsed;</div><div class="line">	<span class="keyword">uint32_t</span>          nNumOfElements;</div><div class="line">	<span class="keyword">uint32_t</span>          nTableSize;</div><div class="line">	<span class="keyword">uint32_t</span>          nInternalPointer;</div><div class="line">	zend_long         nNextFreeElement;</div><div class="line">	<span class="keyword">dtor_func_t</span>       pDestructor;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>主要字段介绍:</p>
+<ul>
+<li>gc 引用次数,垃圾回收时会用到。</li>
+<li>union u 就不介绍了。</li>
+<li>arData 存储元素的数组,内存是连续的,arData指向第一个元素。</li>
+<li>nTableMask nTableSize的负数。</li>
+<li>nTableSize 数组长度,为2的n此房。</li>
+<li>nNumUsed 当前使用的Bucket数。</li>
+<li>nNumOfElements 当前所有的Bucket数。</li>
+<li>nNextFreeElement 下一个被使用的Bucket($a[] = ‘’)</li>
+<li>pDestructor 删除某个元素是会使用</li>
+</ul>
+<h2 id="Bucket结构"><a href="#Bucket结构" class="headerlink" title="Bucket结构"></a>Bucket结构</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> _Bucket &#123;</div><div class="line">	zval              val;</div><div class="line">	zend_ulong        h;                <span class="comment">/* hash value (or numeric index)   */</span></div><div class="line">	zend_string      *key;              <span class="comment">/* string key or NULL for numerics */</span></div><div class="line">&#125; Bucket;</div></pre></td></tr></table></figure>
+<ul>
+<li>h hash出来的值(times33)</li>
+<li>*key 存储元素的key</li>
+<li>val 具体值,是个zval</li>
+</ul>
+<h2 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h2><p>php中实现散列表实现主要使用<code>存储元素数组</code>和 <code>映射函数</code>（也可以称作散列函数）和<code>映射表</code></p>
+<h4 id="举个具体的栗子"><a href="#举个具体的栗子" class="headerlink" title="举个具体的栗子:"></a>举个具体的栗子:</h4><p> 如果我们要在php代码中声明一个数组会发生什么?下边分析下php是如何实现数组的。<br> <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$arr= [</div><div class="line">	<span class="string">'a'</span> =&gt; <span class="string">'111'</span>,</div><div class="line">	<span class="string">'b'</span> =&gt; <span class="string">'222'</span>,</div><div class="line">	<span class="string">'c'</span> =&gt; <span class="string">'ccc'</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
+<ol>
+<li>首先肯定是初始化。</li>
+<li>接下来将每个元素对应的值依照顺序拷贝到 Bucket里。</li>
+<li>然后利用映射函数对求值,根据算出来的值将其对应的bucket的地址写到该值对应的映射这表里。</li>
+</ol>
+<p>具体操作如下图:<br><img src="/photo/img/php数组实现/php数组具体实现.png" alt="image"></p>
+<p>当然我们这里的映射是理想映射,因为在映射的计算过程中可能存在冲突,后续会介绍映射函数,以及如何解映射函数计算后的冲突。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ZEND_API <span class="keyword">void</span> ZEND_FASTCALL _zend_hash_init(HashTable *ht, <span class="keyword">uint32_t</span> nSize, <span class="keyword">dtor_func_t</span> pDestructor, zend_bool persistent ZEND_FILE_LINE_DC)</div><div class="line">&#123;</div><div class="line">	GC_REFCOUNT(ht) = <span class="number">1</span>; <span class="comment">//设置引用次数</span></div><div class="line">	GC_TYPE_INFO(ht) = IS_ARRAY; <span class="comment">//设置数据类型</span></div><div class="line">	ht-&gt;u.flags = (persistent ? HASH_FLAG_PERSISTENT : <span class="number">0</span>) | HASH_FLAG_APPLY_PROTECTION | HASH_FLAG_STATIC_KEYS;</div><div class="line">	ht-&gt;nTableMask = HT_MIN_MASK;</div><div class="line">	HT_SET_DATA_ADDR(ht, &amp;uninitialized_bucket);</div><div class="line">	ht-&gt;nNumUsed = <span class="number">0</span>;</div><div class="line">	ht-&gt;nNumOfElements = <span class="number">0</span>;</div><div class="line">	ht-&gt;nInternalPointer = HT_INVALID_IDX;</div><div class="line">	ht-&gt;nNextFreeElement = <span class="number">0</span>;</div><div class="line">	ht-&gt;pDestructor = pDestructor;</div><div class="line">	ht-&gt;nTableSize = zend_hash_check_size(nSize);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>初始化的时候主要是对hashtable中各个成员的进行初始化设置,而且在这个时候不会给arData分配内存,只有在开始插入数据的时候才会<br>为arData分配内存。</p>
+<h2 id="映射函数"><a href="#映射函数" class="headerlink" title="映射函数"></a>映射函数</h2><p>映射函数其实就是一次<code>hash</code>操作和和一次<code>|</code>操作.<br>hash操作就是上边锁提到得到times33操作,<code>|</code>操作是计算出来的hash值与nTableSize进行计算。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nIndex = ket-&gt;h | nTableMask;</div></pre></td></tr></table></figure></p>
+<p>因为nTableMask是nTableSize的负数,所以计算出来的nIndex值区间应该为[-1,nTableMask]。</p>
+<p>此处待补充 为什么会在[-1, nTableMask] 区间内。</p>
+<h3 id="写入数据"><a href="#写入数据" class="headerlink" title="写入数据"></a>写入数据</h3><p>在初始化的时候并不会对arData分配内存,只有在写入的时候才会真正分配内存</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> zend_always_inline <span class="title">zend_hash_real_init_ex</span><span class="params">(HashTable *ht, <span class="keyword">int</span> packed)</span></span></div><div class="line">&#123;</div><div class="line">	HT_ASSERT(GC_REFCOUNT(ht) == <span class="number">1</span>);</div><div class="line">	ZEND_ASSERT(!((ht)-&gt;u.flags &amp; HASH_FLAG_INITIALIZED));</div><div class="line">	<span class="keyword">if</span> (packed) &#123;</div><div class="line">		HT_SET_DATA_ADDR(ht, pemalloc(HT_SIZE(ht), (ht)-&gt;u.flags &amp; HASH_FLAG_PERSISTENT));</div><div class="line">		(ht)-&gt;u.flags |= HASH_FLAG_INITIALIZED | HASH_FLAG_PACKED;</div><div class="line">		HT_HASH_RESET_PACKED(ht);</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		(ht)-&gt;nTableMask = -(ht)-&gt;nTableSize;</div><div class="line">		HT_SET_DATA_ADDR(ht, pemalloc(HT_SIZE(ht), (ht)-&gt;u.flags &amp; HASH_FLAG_PERSISTENT));</div><div class="line">		(ht)-&gt;u.flags |= HASH_FLAG_INITIALIZED;</div><div class="line">		<span class="keyword">if</span> (EXPECTED(ht-&gt;nTableMask == <span class="number">-8</span>)) &#123;</div><div class="line">			Bucket *arData = ht-&gt;arData;</div><div class="line"></div><div class="line">			HT_HASH_EX(arData, <span class="number">-8</span>) = <span class="number">-1</span>;</div><div class="line">			HT_HASH_EX(arData, <span class="number">-7</span>) = <span class="number">-1</span>;</div><div class="line">			HT_HASH_EX(arData, <span class="number">-6</span>) = <span class="number">-1</span>;</div><div class="line">			HT_HASH_EX(arData, <span class="number">-5</span>) = <span class="number">-1</span>;</div><div class="line">			HT_HASH_EX(arData, <span class="number">-4</span>) = <span class="number">-1</span>;</div><div class="line">			HT_HASH_EX(arData, <span class="number">-3</span>) = <span class="number">-1</span>;</div><div class="line">			HT_HASH_EX(arData, <span class="number">-2</span>) = <span class="number">-1</span>;</div><div class="line">			HT_HASH_EX(arData, <span class="number">-1</span>) = <span class="number">-1</span>;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			HT_HASH_RESET(ht);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>分配具体的内存</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> HT_SIZE_EX(nTableSize, nTableMask) \</span></div><div class="line">	(HT_DATA_SIZE((nTableSize)) + HT_HASH_SIZE((nTableMask)))</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#define HT_HASH_SIZE(nTableMask) \</div><div class="line">	(((size_t)(uint32_t)-(int32_t)(nTableMask)) * sizeof(uint32_t))</div><div class="line"></div><div class="line">#define HT_DATA_SIZE(nTableSize) \</div><div class="line">	((size_t)(nTableSize) * sizeof(Bucket))</div></pre></td></tr></table></figure>
+<p>可以看到在分配具体分配内存的时候会分配 nTableSize<em>(Bucket+uint32_t)大小的内存。<br>讲道理只需要分配nTableSize</em>Bucket大小内存就可以了,为什么会多余出来 nTableSize<em>uint32_t内存呢?<br>因为nTableSize</em>uint32_t就是<code>映射表</code>所占内存大小。所以说Bucket会和映射表一次申请内存。<br>写完成写入操作以后会将<code>*arData</code> 指向第一个Bucket。</p>
+<p>具体在内存里的结果如图所示:<br><img src="/photo/img/php数组实现/hashtable.png" alt="image"></p>
+<p><code>映射表</code>在初始化的时候所有值都是-1,只有在被赋值时候会写入对应<code>Bucket</code>所在链表的偏移量。;<br>ht-&gt;arData 指向第一个<code>Bucket</code>的位置,在赋值的时候会按照列表顺序,将值写入<code>Bucket</code>的value里,然后会根据<br>映射函数算出值当做偏移量找到对应<code>映射表</code>的元素,然后将当前<code>Bucket</code>写入此元素。</p>
+<p>ps nTableSize 为2的次方倍。</p>
+<h2 id="冲突"><a href="#冲突" class="headerlink" title="冲突"></a>冲突</h2><p>如果<code>nIndex = ket-&gt;h | nTableMask</code> 算出来的值冲突了怎么办? 首先<code>映射表</code>的每个元素不是链表,所以导致无法存储多个元素。<br>在php中是这样处理冲突的:<br>首先<code>映射表</code>的所有元素初始化值为 -1 ,当前<br>如果用冲突会将新算出来的值对应的<code>Bucket</code>覆盖原来旧的<code>Bucket</code>,然后将旧的<code>Bucket</code>迁移到新的<code>Bucket</code>,<br>并将旧的<code>Bucket</code>的u2.next(默认为-1) 指向新<code>Bucket</code>。</p>
+<p>如图<br><img src="/photo/img/php数组实现/链表冲突.png" alt="image"></p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>php再查找一个数组元素是,首先会根据其key 获取到计算后hash值’ket-&gt;h’,然后根据映射函数算出当前元素在<code>映射表</code>中的偏移量,利用当前位置+偏移量找到<code>映射表</code>的元素,再根据其内的偏量找到对应<code>Bucket</code>链表的首个元素位置,最后遍历该链表核对key值,找到对应的值。</p>
+<p>具体实现函数:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> zend_always_inline Bucket *<span class="title">zend_hash_find_bucket</span><span class="params">(<span class="keyword">const</span> HashTable *ht, zend_string *key)</span></span></div><div class="line">&#123;</div><div class="line">	zend_ulong h;</div><div class="line">	<span class="keyword">uint32_t</span> nIndex;</div><div class="line">	<span class="keyword">uint32_t</span> idx;</div><div class="line">	Bucket *p, *arData;</div><div class="line"></div><div class="line">	h = zend_string_hash_val(key);</div><div class="line">	arData = ht-&gt;arData;</div><div class="line">	nIndex = h | ht-&gt;nTableMask;</div><div class="line">	idx = HT_HASH_EX(arData, nIndex);</div><div class="line">	<span class="keyword">while</span> (EXPECTED(idx != HT_INVALID_IDX)) &#123;</div><div class="line">		p = HT_HASH_TO_BUCKET_EX(arData, idx);</div><div class="line">		<span class="keyword">if</span> (EXPECTED(p-&gt;key == key)) &#123; <span class="comment">/* check for the same interned string */</span></div><div class="line">			<span class="keyword">return</span> p;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (EXPECTED(p-&gt;h == h) &amp;&amp;</div><div class="line">		     EXPECTED(p-&gt;key) &amp;&amp;</div><div class="line">		     EXPECTED(ZSTR_LEN(p-&gt;key) == ZSTR_LEN(key)) &amp;&amp;</div><div class="line">		     EXPECTED(<span class="built_in">memcmp</span>(ZSTR_VAL(p-&gt;key), ZSTR_VAL(key), ZSTR_LEN(key)) == <span class="number">0</span>)) &#123;</div><div class="line">			<span class="keyword">return</span> p;</div><div class="line">		&#125;</div><div class="line">		idx = Z_NEXT(p-&gt;val);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><p>数组的容量在初始化的时候已经确定了大小,就是nTableSize。当然映射函数也是根据 nTableMask 来计算的。<br>所以我们扩容时候必须重新计算索引,也就是<code>映射表</code>里的值。<br>具体扩容规则:<br>首先当需要扩容时,会计算当前<code>Bucket</code>链表里删除元素数量占总表元素数量的比例,如果没有超过阈值则申请分配一个原来数组大小两倍的新素组,把元素复制到新数组上,然后重新建立索引。</p>
+<p>阈值判断:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ht-&gt;nNumUsed &gt; ht-&gt;nNumOfElements + (ht-&gt;nNumOfElements &gt;&gt; <span class="number">5</span></div></pre></td></tr></table></figure></p>
+<p>处理过程:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> ZEND_FASTCALL <span class="title">zend_hash_do_resize</span><span class="params">(HashTable *ht)</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">	IS_CONSISTENT(ht);</div><div class="line">	HT_ASSERT(GC_REFCOUNT(ht) == <span class="number">1</span>);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (ht-&gt;nNumUsed &gt; ht-&gt;nNumOfElements + (ht-&gt;nNumOfElements &gt;&gt; <span class="number">5</span>)) &#123; <span class="comment">/* additional term is there to amortize the cost of compaction */</span></div><div class="line">		HANDLE_BLOCK_INTERRUPTIONS();</div><div class="line">		zend_hash_rehash(ht);</div><div class="line">		HANDLE_UNBLOCK_INTERRUPTIONS();</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ht-&gt;nTableSize &lt; HT_MAX_SIZE) &#123;	<span class="comment">/* Let's double the table size */</span></div><div class="line">		<span class="keyword">void</span> *new_data, *old_data = HT_GET_DATA_ADDR(ht);</div><div class="line">		<span class="keyword">uint32_t</span> nSize = ht-&gt;nTableSize + ht-&gt;nTableSize;</div><div class="line">		Bucket *old_buckets = ht-&gt;arData;</div><div class="line"></div><div class="line">		HANDLE_BLOCK_INTERRUPTIONS();</div><div class="line">		new_data = pemalloc(HT_SIZE_EX(nSize, -nSize), ht-&gt;u.flags &amp; HASH_FLAG_PERSISTENT);</div><div class="line">		ht-&gt;nTableSize = nSize;</div><div class="line">		ht-&gt;nTableMask = -ht-&gt;nTableSize;</div><div class="line">		HT_SET_DATA_ADDR(ht, new_data);</div><div class="line">		<span class="built_in">memcpy</span>(ht-&gt;arData, old_buckets, <span class="keyword">sizeof</span>(Bucket) * ht-&gt;nNumUsed);</div><div class="line">		pefree(old_data, ht-&gt;u.flags &amp; HASH_FLAG_PERSISTENT);</div><div class="line">		zend_hash_rehash(ht);</div><div class="line">		HANDLE_UNBLOCK_INTERRUPTIONS();</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		zend_error_noreturn(E_ERROR, <span class="string">"Possible integer overflow in memory allocation (%zu * %zu + %zu)"</span>, ht-&gt;nTableSize * <span class="number">2</span>, <span class="keyword">sizeof</span>(Bucket) + <span class="keyword">sizeof</span>(<span class="keyword">uint32_t</span>), <span class="keyword">sizeof</span>(Bucket));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在处理的过程中还会把已经删除的<code>Bucket</code>给删除。</p>
+<p>具体的操作在<code>zend_hash.c</code>文件里。<br>如果超过阈值,则会把已经删除<code>Bucket</code>移除,然后把又有后边的元素往前移动,不上空缺的<code>Bucket</code>,当然索引也会重建。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.cnblogs.com/52fhy/p/5007456.html" target="_blank" rel="noopener">time33 </a></li>
+<li><a href="https://github.com/pangudashu/php7-internal/blob/master/2/zval.md" target="_blank" rel="noopener">2.1 变量的内部实现</a></li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/08/20/php数组实现/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/19/php数据结构/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">php数据结构</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 MaxieLj
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">curl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">分布式,事务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">python, shell, crond</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">builder template method</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.zybuluo.com/mdeditor" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>在线编辑器</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
