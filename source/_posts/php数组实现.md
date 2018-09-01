@@ -319,6 +319,8 @@ static void ZEND_FASTCALL zend_hash_do_resize(HashTable *ht)
 如果超过阈值,则会把已经删除`Bucket`移除,然后把又有后边的元素往前移动,不上空缺的`Bucket`,当然索引也会重建。
 
 
+
+
 ## 参考
 - [time33 ](https://www.cnblogs.com/52fhy/p/5007456.html)
 - [2.1 变量的内部实现](https://github.com/pangudashu/php7-internal/blob/master/2/zval.md)

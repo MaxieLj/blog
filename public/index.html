@@ -133,6 +133,69 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-php闭包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/25/php闭包/">php闭包</a>
+    </h1>
+  
+
+        <a href="/2018/08/25/php闭包/" class="archive-article-date">
+  	<time datetime="2018-08-25T06:50:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-25</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在看guzzle包的时候看大到了一段有意思的代码, 简化以后类似于下边:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line">* </div><div class="line">*/</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span> </span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span>  $handler;</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(callable $handler = null)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;handler = $handler;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span><span class="params">(callable $handler)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">self</span>($handler);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span><span class="params">($request,$options)</span></span></div><div class="line">	&#123;</div><div class="line">		$func = <span class="keyword">$this</span>-&gt;handler;</div><div class="line">	    <span class="keyword">return</span> $func($request, $options);</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">test1</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> [<span class="keyword">$this</span>, <span class="string">'exec1'</span>];</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">exec1</span><span class="params">($a,$b)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">echo</span> ($a+$b);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$test = <span class="keyword">new</span> test();</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">$obj = test::create($test-&gt;test1());</div><div class="line"></div><div class="line">$obj(<span class="number">1</span>,<span class="number">4</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>php文档是这样描述闭包的</li>
+</ul>
+<p>`PHP是将函数以string形式传递的。 可以使用任何内置或用户自定义函数，但除了语言结构例如：array()，echo，empty()，eval()，exit()，isset()，list()，print 或 unset()。</p>
+<p> 一个已实例化的 object 的方法被作为 array 传递，下标 0 包含该 object，下标 1 包含方法名。 在同一个类里可以访问 protected 和 private 方法。</p>
+<p> 静态类方法也可不经实例化该类的对象而传递，只要在下标 0 中包含类名而不是对象。自 PHP 5.2.3 起，也可以传递 ‘ClassName::methodName’。</p>
+<p> 除了普通的用户自定义函数外，也可传递 匿名函数 给回调参数。`</p>
+<p>所以实例化的对象可以使用 <code>[$obj,&#39;functionName&#39;]</code> 当做闭包去传递。<br><code>$obj = test::create($test-&gt;test1());</code>将我们的<code>test1</code>方法赋值给新实例化的对象里。</p>
+<ul>
+<li>魔术方法<code>__invoke()</code>表示:</li>
+</ul>
+<p>当尝试以调用函数的方式调用一个对象时，__invoke() 方法会被自动调用。</p>
+<p>所以我们调用<code>$obj()</code>函数时会调用到__invoke()里,最后调用到我们一开始注册的函数。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/25/php闭包/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-php数组实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -768,58 +831,9 @@
 
 
   
-    <article id="post-solr-从控制页面删除数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/21/solr-从控制页面删除数据/">solr-从控制页面删除数据</a>
-    </h1>
-  
-
-        <a href="/2018/06/21/solr-从控制页面删除数据/" class="archive-article-date">
-  	<time datetime="2018-06-21T12:21:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-21</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-xml"><a href="#1-xml" class="headerlink" title="1.xml"></a>1.xml</h1><p><img src="/photo/img/2018-06-21/DingTalk20180621202319.png" alt="image"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;delete&gt;&lt;query&gt;*:*&lt;/query&gt;&lt;/delete&gt;</div><div class="line">&lt;commit/&gt;</div></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/21/solr-从控制页面删除数据/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -883,11 +897,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python, shell, crond</a>
+                <a href="javascript:void(0)">builder template method</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">builder template method</a>
+                <a href="javascript:void(0)">python, shell, crond</a>
               </li>
             
             <div class="clearfix"></div>
