@@ -25,13 +25,13 @@ struct _zend_reference {
 ### 举个栗子
 
 ```
-    $a = 'test'; //步骤1
+    $a = time(); //步骤1
     $b = &$a;    //步骤2
 ```
 
 **步骤1**
 
-现在`$a = ''test`是他们的数据结构指向为:
+现在`$a = time()`是他们的数据结构指向为:
 
 ![image](/photo/img/php引用/未引用前.png)
 
