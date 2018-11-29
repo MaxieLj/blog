@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2018/09/12/php%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
+    <loc>http://yoursite.com/2018/09/12/php%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</loc>
     
-    <lastmod>2018-11-09T01:50:02.555Z</lastmod>
+    <lastmod>2018-11-26T02:14:21.387Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/20/php%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/</loc>
+    
+    <lastmod>2018-11-14T01:55:32.249Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/20/%E4%B8%80%E6%AC%A1HTTP%E8%AF%B7%E6%B1%82/</loc>
+    
+    <lastmod>2018-11-10T09:01:27.815Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/09/28/%E4%BD%BF%E7%94%A8guzzle%E5%B9%B6%E8%A1%8C%E8%AF%B7%E6%B1%82/</loc>
+    
+    <lastmod>2018-11-09T01:53:42.848Z</lastmod>
     
   </url>
   
@@ -30,13 +51,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2018/09/28/%E4%BD%BF%E7%94%A8guzzle%E5%B9%B6%E8%A1%8C%E8%AF%B7%E6%B1%82/</loc>
-    
-    <lastmod>2018-10-22T02:59:05.635Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2018/09/28/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AAcomposer%E7%A7%81%E6%9C%89%E5%8C%85/</loc>
     
     <lastmod>2018-10-16T12:05:39.870Z</lastmod>
@@ -54,13 +68,6 @@
     <loc>http://yoursite.com/2018/08/25/php%E9%97%AD%E5%8C%85/</loc>
     
     <lastmod>2018-08-25T08:24:48.893Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/08/20/php%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/</loc>
-    
-    <lastmod>2018-08-25T08:13:50.366Z</lastmod>
     
   </url>
   
@@ -124,13 +131,6 @@
     <loc>http://yoursite.com/2018/06/19/websocket%E8%AE%A2%E9%98%85%E7%81%AB%E5%B8%81%E6%88%90%E4%BA%A4%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2018-06-19T10:19:48.515Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/11/20/%E4%B8%80%E6%AC%A1HTTP%E8%AF%B7%E6%B1%82/</loc>
-    
-    <lastmod>2017-11-21T03:01:53.000Z</lastmod>
     
   </url>
   
