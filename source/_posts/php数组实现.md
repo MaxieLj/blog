@@ -4,7 +4,7 @@ date: 2018-08-20 20:00:08
 tags:
 ---
 
-要说php的数组,就不得不讲hashtable,以为php的数组是强依赖于hashtable实现的。一般
+php的数组依赖于hashtable实现的。
 
 Times33的算法很简单，就是不断的乘33,下边是times33算法:
 
@@ -316,7 +316,7 @@ static void ZEND_FASTCALL zend_hash_do_resize(HashTable *ht)
 在处理的过程中还会把已经删除的`Bucket`给删除。
 
 具体的操作在`zend_hash.c`文件里。
-如果超过阈值,则会把已经删除`Bucket`移除,然后把又有后边的元素往前移动,不上空缺的`Bucket`,当然索引也会重建。
+如果超过阈值,则会把已经删除`Bucket`移除,然后把又有后边的元素往前移动,补上空缺的`Bucket`,当然索引也会重建。
 
 
 
