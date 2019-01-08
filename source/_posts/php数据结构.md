@@ -1,9 +1,11 @@
 ---
 title: php数据结构
 date: 2018-08-19 20:30:34
-tags:
+tags: php源码
+categories: php源码学习
+toc: true
 ---
-`[TOC]`
+
 ## 变量
    
 php是如何统一实现各种变量类型的? 这和php变量类型的实现是密不可分的。

@@ -1,7 +1,9 @@
 ---
 title: 如何建立一个composer私有包
 date: 2018-09-28 17:11:00
-tags:
+tags: composer
+categories: 工具
+toc: true
 ---
 
 

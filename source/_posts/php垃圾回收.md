@@ -1,7 +1,9 @@
 ---
 title: php垃圾回收
 date: 2018-09-12 21:28:00
-tags:
+tags: php源码
+categories: php源码学习
+toc: true
 ---
 
 php是如何实现内存管理的?内存管理无非包括内存分配、内存回收、以及内存使用优化。

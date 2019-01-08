@@ -7,7 +7,7 @@ title: Maxie'blog
 subtitle:
 description:
 author: MaxieLj
-language:
+language: zh-CN
 timezone:
 
 # URL
@@ -16,6 +16,7 @@ url: http://yoursite.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
+
 
 # Directory
 source_dir: source
@@ -40,8 +41,10 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
+  auto_detect: true
   tab_replace:
+mathjax: true
+
 
 # Category & Tag
 default_category: uncategorized
@@ -63,7 +66,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: apollo
+theme: maupassant
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -90,3 +93,4 @@ jsonContent:
     excerpt: false
     categories: false
     tags: true
+

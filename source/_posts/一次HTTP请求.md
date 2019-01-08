@@ -1,7 +1,9 @@
 ---
 title: 一次HTTP请求
 date: 2016-11-20 20:09:23
-tags:
+tags: 网络
+categories: 网络
+toc: true
 ---
 
 #一次完整的HTTP请求，以及请求方式的区别

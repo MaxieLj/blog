@@ -1,7 +1,9 @@
 ---
 title: php数组实现
 date: 2018-08-20 20:00:08
-tags:
+tags: php源码
+categories: php源码学习
+toc: true
 ---
 
 php的数组依赖于hashtable实现的。

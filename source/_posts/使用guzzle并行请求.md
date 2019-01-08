@@ -1,7 +1,9 @@
 ---
 title: 使用guzzle并行请求
 date: 2018-09-28 17:10:05
-tags: 压测
+tags: php
+categories: php
+toc: true
 ---
 
 ## 背景

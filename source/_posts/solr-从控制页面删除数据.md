@@ -1,7 +1,8 @@
 ---
 title: solr-增删改查
 date: 2018-06-21 20:21:18
-tags:
+tags: solr
+toc: true
 ---
 ## 背景
 solr 版本 5.3.1

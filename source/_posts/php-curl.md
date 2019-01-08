@@ -1,7 +1,9 @@
 ---
 title: php curl
 date: 2015-07-18 20:28:10
-tags: curl
+tags: php
+categories: php
+toc: true
 ---
 
 

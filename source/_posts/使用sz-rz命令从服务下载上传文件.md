@@ -1,7 +1,9 @@
 ---
 title: Item2使用sz rz命令从服务下载上传文件
 date: 2018-07-12 21:27:37
-tags:
+tags: 工具
+categories: 工具
+toc: true
 ---
 
 ## 背景

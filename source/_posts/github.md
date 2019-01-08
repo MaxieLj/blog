@@ -1,9 +1,9 @@
-layout: git
+---
 title: github
 date: 2015-06-26 22:04:09
-tags:
----
-#关于Git的使用  
+tags: git
+toc: true
+categories: git
 ------
 
 ## Git的安装和使用 ##

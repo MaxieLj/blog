@@ -1,7 +1,9 @@
 ---
 title: php闭包
 date: 2018-08-25 14:50:55
-tags:
+tags: php
+categories: php
+toc: true
 ---
 在看guzzle包的时候看大到了一段有意思的代码, 简化以后类似于下边:
 

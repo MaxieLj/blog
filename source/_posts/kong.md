@@ -1,7 +1,9 @@
 ---
 title: kong
 date: 2018-12-02 19:02:17
-tags:
+tags: kong
+categories: kong
+toc: true
 ---
 
 当前系统，环境centos7
