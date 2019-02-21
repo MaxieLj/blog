@@ -1,6 +1,6 @@
 ---
 title: hexo git github搭建博客
-date: 2015-06-02 21:48:07
+date: 2016-01-02 21:48:07
 tags: hexo
 toc: true
 categories: hexo

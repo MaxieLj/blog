@@ -6,7 +6,7 @@ categories: php源码学习
 toc: true
 ---
 
-php是如何实现内存管理的?内存管理无非包括内存分配、内存回收、以及内存使用优化。
+php是如何实现内存管理的?内存管理包括内存分配、内存回收、以及内存使用优化。
 
 - 内存使用的优化
 - 垃圾回收机制
@@ -19,18 +19,18 @@ php是如何实现内存管理的?内存管理无非包括内存分配、内存�
 
 php的引用中有个引用结构体
 
-```php
+
 ```c
 struct _zend_reference {
     zend_refcondted_h gc;
     zval              val;  指向原来的value.
 };
 ```
-```
+
 其中`zend_refcondted_h` 便是gc便是当前变量被引用的次数,这个参数会在变量回收的时候用到。
 
 
-zend_refcondted_h :
+`zend_refcondted_h` :
 
 ```c
 typedef struct _zend_refcounted_h {
@@ -89,7 +89,7 @@ $c = '123';
 在自动gc机制中,如果zval不在指向value且当前value的gc.refount为0时,会直接释放value。这种情况多发生于函数返回时（销毁所有局部变量）、变量修改时、以及unset操作的时候。
 
 
-### 辣鸡回收
+### 垃圾回收
 
 除了自动gc,还有一种是自动gc无法处理的垃圾, 这种情况称为`循环引用`。顾名思义也就是自身内部变量引用了自身, 这种情况常出现与object和array。当我该变量zval被销毁是, 与其对应的value gc.refcount -1,
 但是因为有自身变量指向自身, 所以就陷入了一个循环:如果不销毁自身变量 value gc.refcount就无法自动gc, 只有自动gc才会销毁value。
@@ -115,7 +115,7 @@ unset($a);
 
 ### 回收机制
 
-当发生value gc.refcount减少时，垃圾回收机制会把可能是垃圾的value存起来， 当可能是辣鸡的value到达一定数量的时候启动垃圾鉴别程序，统一处理垃圾。当然这里的value类型只有object和array。
+当发生value gc.refcount减少时，垃圾回收机制会把可能是垃圾的value存起来， 当可能是垃圾的value到达一定数量的时候启动垃圾鉴别程序，统一处理垃圾。当然这里的value类型只有object和array。
 
 垃圾兼备程序：
 其实垃圾鉴别程序很简单，递归遍历自身value，查看是否存在指向自身的即可。
@@ -258,8 +258,6 @@ ZEND_API void ZEND_FASTCALL gc_possible_root(zend_refcounted *ref)
 }
 ```
 
-
-debug代码已删除
 1. 深度优先对对象或者数据的每一个元素的`refcount--`并将其标记为灰色
 2. 深度遍历root的每个每个变量，如果此时变量的`refcount`为0，则代表着改变量为垃圾，将其标记为垃圾，如果不为0，则将其标记为黑色（正常）。
 3. 检查roots清除标记为白色的垃圾。
