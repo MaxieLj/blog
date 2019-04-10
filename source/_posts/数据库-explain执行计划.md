@@ -6,6 +6,7 @@ categories: 算法
 toc: true
 ---
 
+
 ## 官方文档
 使用`explain`可以分析sql的执行情况，定位慢sql的问题，从而可优化查询语句。
 `explain的官方文档`
